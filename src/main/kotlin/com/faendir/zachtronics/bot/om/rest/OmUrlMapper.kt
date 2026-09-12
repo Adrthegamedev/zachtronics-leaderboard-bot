@@ -32,7 +32,7 @@ class OmUrlMapper : UrlMapper {
         val (commit, puzzleId, record) = segments
         val puzzle = OmPuzzle.entries.find { it.id.equals(puzzleId, ignoreCase = true) } ?: return null
         val fileName = if(record.endsWith(puzzle.name)) record else "${record}_${puzzle.name}"
-        return "https://raw.githubusercontent.com/f43nd1r/om-leaderboard/${commit}/${puzzle.group.name}/${puzzle.name}/${fileName}.solution"
+        return "https://raw.githubusercontent.com/Adrthegamedev/om-leaderboard/${commit}/${puzzle.group.name}/${puzzle.name}/${fileName}.solution"
     }
 
     fun createShortUrl(commitId: String, puzzle: OmPuzzle, score: OmScore): String = buildUrl("$commitId/${puzzle.id}/${score.toDisplayString(DisplayContext.fileName())}")
