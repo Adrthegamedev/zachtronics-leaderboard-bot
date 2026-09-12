@@ -63,5 +63,13 @@ enum class OmGroup(val collection: OmCollection, override val displayName: Strin
     TOURNAMENT_2025(COMMUNITY, "Tournament 2025"),
     TOURNAMENT_2026(COMMUNITY, "Tournament 2026"),
     WEEKLIES_1(COMMUNITY, "Best Of Weeklies 1"),
+
+    ALCHADEMY(CUSTOM, "Alchademy"),
+    WAHT_2024(CUSTOM, "Whose Ad-Hoc Tournament 2024"),
+    SALT_OF_SATURN(CUSTOM, "The Method of the Salt of Saturn"),
+    TRIXIE(CUSTOM, "Trixie Kagami's Tournament Takeover"),
+    DARK_BRICK(CUSTOM, "Dark Brick's Miscellaneous Events"),
+    FLARE_MODIF(CUSTOM, "Surrender Flare Salt Modifications!"),
+    MISC(CUSTOM, "Miscellaneous"),
     ;
 }

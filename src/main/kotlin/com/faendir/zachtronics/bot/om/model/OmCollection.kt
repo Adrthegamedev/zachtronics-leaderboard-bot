@@ -24,4 +24,5 @@ enum class OmCollection(override val displayName: String): Group {
     JOURNAL_XCIX("Journal XCIX"),
     JOURNAL_CVIII("Journal CVIII"),
     COMMUNITY("Community"),
+    CUSTOM("Further Community"),
 }

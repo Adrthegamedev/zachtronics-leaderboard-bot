@@ -344,6 +344,35 @@ enum class OmPuzzle(
     IGNITION_CORD(WEEKLIES_1, POLYMER_HEIGHT, "Ignition Cord", "w2839120106", "OM2022Weeklies_IgnitionCord"),
     // CUPRITE(WEEKLIES_1, NORMAL, "Cuprite", "w2868328394", "OM2022Weeklies_Cuprite"),
     LUSTROUS_SYRUP(WEEKLIES_1, NORMAL, "Lustrous Syrup", "w2868331650", "OM2022Weeklies_LustrousSyrup"),
+
+    IN_BERLO_S_BASEMENT(ALCHADEMY, NORMAL, "In Berlo's Basement", "w2783659165"),
+    TARICENE(ALCHADEMY, POLYMER_HEIGHT, "Taricene", "Alchademy_Taricene"),
+
+    TINSEL(WAHT_2024, POLYMER_HEIGHT, "Tinsel", "waht2024_p1"),
+    CHILDREN_S_TOYS(WAHT_2024, PRODUCTION, "Children's toys", "waht2024_p2"),
+
+    EXTRACTION_FROM_SAPA(SALT_OF_SATURN, PRODUCTION, "Extraction from Sapa", "SOS_Extraction_from_Sapa"),
+    SALT_OF_SATURN_BY_VINEGAR(SALT_OF_SATURN, NORMAL, "Salt of Saturn by Vinegar", "SOS_Salt_of_Saturn_by_Vinegar"),
+    BURNING_SPIRIT_OF_SATURN(SALT_OF_SATURN, NORMAL, "Burning Spirit of Saturn", "SOS_Burning_Spirit_of_Saturn"),
+    MAGISTERY_OF_SATURN(SALT_OF_SATURN, NORMAL, "Magistery of Saturn", "SOS_Magistery_of_Saturn"),
+    SATURN_S_TREE(SALT_OF_SATURN, NORMAL, "Saturn's Tree", "SOS_Saturn's_Tree"),
+
+    CORPORATE_WASTE_REDUCTION(TRIXIE, NORMAL, "Corporate Waste Reduction", "c559546529329990"),
+    // LAMBENT_LXVII(TRIXIE, NORMAL, "Lambent LXVII", "c589658269721779"),
+    SEPTSTABILIZED_SALT(TRIXIE, NORMAL, "Septstabilized Salt", "HeptstabilizedSalt"),
+    SIGMAR_S_GARDEN(TRIXIE, NORMAL, "Sigmar's Garden", "c584491287336990"),
+
+    GLORP_S_CONSTRUCT(DARK_BRICK, NORMAL, "Glorp's Construct", "GlorpsConstruct"),
+    MISTS_OF_PROJECTION(DARK_BRICK, NORMAL, "Mists Of Projection", "mists-of-projection"),
+    ELECTROLYSED_LITHARGE(DARK_BRICK, NORMAL, "Electrolysed Litharge", "electrolysed-litharge"),
+    PROFANED_MOONSHINE(DARK_BRICK, NORMAL, "Profaned Moonshine", "profaned-moonshine"),
+    CRITELLIC_SLAG(DARK_BRICK, NORMAL, "Critellic Slag", "critellic-slag"),
+
+    SURRENDIER_FLARE_SALT(FLARE_MODIF, NORMAL, "Surrendier Flare Salt", "c651474216460134"),
+
+    MY_ARMS_ARE_BOUND(MISC, NORMAL, "My Arms Are Bound", "MyArmsAreBound"),
+    COLON_THREE(MISC, NORMAL, ":3", "c558264505561023"),
+    IRON_CONCENTRATION(MISC, NORMAL, "Iron Concentration", "IronConcentration"),
     ;
 
     override val supportedCategories: List<OmCategory> = OmCategory.entries.filter { it.supportsPuzzle(this) }
