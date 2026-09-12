@@ -1,0 +1,19 @@
+services:
+  zachtronics-leaderboard-bot:
+    build: .
+    container_name: zachtronics-leaderboard-bot
+    ports:
+      - "8080:8080"
+    environment:
+      DISCORD_TOKEN: MUST_BE_SET
+      GIT_USERNAME: MUST_BE_SET
+      GIT_ACCESS_TOKEN: MUST_BE_SET
+      GIT_WEBHOOK_SECRET: MUST_BE_SET
+      GIT_READONLY_MODE: true # for testing
+      REDDIT_USERNAME: MUST_BE_SET
+      REDDIT_PASSWORD: MUST_BE_SET
+      REDDIT_ACCESS_TOKEN: MUST_BE_SET
+      REDDIT_CLIENT_ID: MUST_BE_SET
+      MORS_API_KEY: MUST_BE_SET
+## enable debugger connection
+#      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
