@@ -30,13 +30,13 @@ internal class OmUrlMapperTest {
     @Test
     fun `should map old short to long url correctly`() {
         expectThat(urlMapper.map("d5524ee3/P103/2265g-47c-1694a-516i-59h-34.5w-1r_ELECTRUM_SEPARATION"))
-            .isEqualTo("https://raw.githubusercontent.com/f43nd1r/om-leaderboard/d5524ee3/JOURNAL_VIII/ELECTRUM_SEPARATION/2265g-47c-1694a-516i-59h-34.5w-1r_ELECTRUM_SEPARATION.solution")
+            .isEqualTo("https://raw.githubusercontent.com/Adrthegamedev/om-leaderboard/d5524ee3/JOURNAL_VIII/ELECTRUM_SEPARATION/2265g-47c-1694a-516i-59h-34.5w-1r_ELECTRUM_SEPARATION.solution")
     }
 
     @Test
     fun `should map new short to long url correctly`() {
         expectThat(urlMapper.map("d5524ee3/P103/2265g-47c-1694a-516i-59h-34.5w-1r"))
-            .isEqualTo("https://raw.githubusercontent.com/f43nd1r/om-leaderboard/d5524ee3/JOURNAL_VIII/ELECTRUM_SEPARATION/2265g-47c-1694a-516i-59h-34.5w-1r_ELECTRUM_SEPARATION.solution")
+            .isEqualTo("https://raw.githubusercontent.com/Adrthegamedev/om-leaderboard/d5524ee3/JOURNAL_VIII/ELECTRUM_SEPARATION/2265g-47c-1694a-516i-59h-34.5w-1r_ELECTRUM_SEPARATION.solution")
     }
 
     @Test
