@@ -45,5 +45,5 @@ interface UrlMapper {
     val pathId: String
     fun map(shortUrl: String): String?
 
-    fun buildUrl(path: String) = "https://lb.novae.observer/l/${pathId}/${path.removePrefix("/")}"
+    fun buildUrl(path: String) = "https://novae.observer/l/${pathId}/${path.removePrefix("/")}"
 }

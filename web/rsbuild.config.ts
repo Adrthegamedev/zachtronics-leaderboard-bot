@@ -24,8 +24,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/': 'https://lb.novae.observer',
-      // '/': 'http://lb.novae.observer',
+      '/': 'https://novae.observer',
+      // '/': 'http://novae.observer',
     },
   },
 });

@@ -33,7 +33,7 @@ This is not intended to be a competitive leaderboard, but rather an informative 
 
 # Alternate leaderboard sites
 
-Since November 2021 the improved leaderboard site by F43nd1r is available at https://lb.novae.observer, it is automatically synced to this page.  
+Since November 2021 the improved leaderboard site by F43nd1r is available at https://novae.observer, it is automatically synced to this page.  
 You can browse records by category (including many more community categories) or puzzle. It also includes a view and a visualizer for pareto frontier.
 
 jinyou, a player with many contributions to this leaderboard but no access to post to reddit from his country, has created a second site with a backup leaderboard at https://jinyou.byethost5.com/Opus_Magnum_gif.html

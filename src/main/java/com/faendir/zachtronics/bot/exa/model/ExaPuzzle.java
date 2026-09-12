@@ -89,7 +89,7 @@ public enum ExaPuzzle implements Puzzle<ExaCategory> {
                                          .toList();
         this.prefix = prefix;
         this.displayName = displayName;
-        this.link = "https://lb.novae.observer/exa/" + name();
+        this.link = "https://novae.observer/exa/" + name();
     }
 
 }

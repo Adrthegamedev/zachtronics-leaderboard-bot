@@ -36,7 +36,7 @@ Add `lombok.copyableannotations += com.faendir.zachtronics.bot.cw.CwQualifier` t
 Create git repo in game org.
 
 Add the push webhook:
-* Payload URL: https://lb.novae.observer/push
+* Payload URL: https://novae.observer/push
 * Content type: `application/json`
 * Secret: GPG-encoded file at https://discord.com/channels/747474678498721994/747474678498721997/885673075255943198
 

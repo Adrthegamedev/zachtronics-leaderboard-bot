@@ -419,7 +419,7 @@ public enum ScPuzzle implements Puzzle<ScCategory> {
                                                        !(isDeterministic && (c.getAdmission() == ScMetric.NO_PRECOG ||
                                                                              c.getAdmission() == ScMetric.NO_FLAGS)))
                                           .toList();
-        this.link = "https://lb.novae.observer/sc/" + name();
+        this.link = "https://novae.observer/sc/" + name();
     }
 
     public static List<ScPuzzle> findMatchingPuzzles(String name) {

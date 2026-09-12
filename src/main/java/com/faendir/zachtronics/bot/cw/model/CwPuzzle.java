@@ -55,7 +55,7 @@ public enum CwPuzzle implements Puzzle<CwCategory> {
     CwPuzzle(int id, String displayName) {
         this.id = id;
         this.displayName = displayName;
-        this.link = "https://lb.novae.observer/cw/" + name();
+        this.link = "https://novae.observer/cw/" + name();
     }
 
 }

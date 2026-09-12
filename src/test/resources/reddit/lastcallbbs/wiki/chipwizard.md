@@ -37,45 +37,45 @@ The files can be copied directly into the game's save folder and opened in-game.
 
 | Name | Size | Footprint
 | ---  | ---  | ---
-| [Signal Crossover](https://lb.novae.observer/cw/PUZZLE_1_1) | |
+| [Signal Crossover](https://novae.observer/cw/PUZZLE_1_1) | |
 |
-| [AND Gate](https://lb.novae.observer/cw/PUZZLE_1_2) | |
+| [AND Gate](https://novae.observer/cw/PUZZLE_1_2) | |
 |
-| [OR Gate](https://lb.novae.observer/cw/PUZZLE_1_3) | |
+| [OR Gate](https://novae.observer/cw/PUZZLE_1_3) | |
 |
-| [NOT Gate](https://lb.novae.observer/cw/PUZZLE_1_4) | |
+| [NOT Gate](https://novae.observer/cw/PUZZLE_1_4) | |
 |
-| [Power-on Reset](https://lb.novae.observer/cw/PUZZLE_1_5) | |
+| [Power-on Reset](https://novae.observer/cw/PUZZLE_1_5) | |
 |
-| [Digital Signal Mixer](https://lb.novae.observer/cw/PUZZLE_1_6) | |
+| [Digital Signal Mixer](https://novae.observer/cw/PUZZLE_1_6) | |
 |
-| [Interrupt Controller](https://lb.novae.observer/cw/PUZZLE_1_7) | |
+| [Interrupt Controller](https://novae.observer/cw/PUZZLE_1_7) | |
 |
-| [Ignition Sequencer](https://lb.novae.observer/cw/PUZZLE_2_1) | |
+| [Ignition Sequencer](https://novae.observer/cw/PUZZLE_2_1) | |
 |
-| [Equality Tester](https://lb.novae.observer/cw/PUZZLE_2_2) | |
+| [Equality Tester](https://novae.observer/cw/PUZZLE_2_2) | |
 |
-| [Dual Oscillator](https://lb.novae.observer/cw/PUZZLE_2_3) | |
+| [Dual Oscillator](https://novae.observer/cw/PUZZLE_2_3) | |
 |
-| [Safety Interlock](https://lb.novae.observer/cw/PUZZLE_2_4) | |
+| [Safety Interlock](https://novae.observer/cw/PUZZLE_2_4) | |
 |
-| [PWM Solenoid Driver](https://lb.novae.observer/cw/PUZZLE_2_5) | |
+| [PWM Solenoid Driver](https://novae.observer/cw/PUZZLE_2_5) | |
 |
-| [Electronic Lock](https://lb.novae.observer/cw/PUZZLE_2_6) | |
+| [Electronic Lock](https://novae.observer/cw/PUZZLE_2_6) | |
 |
-| [Motor Controller](https://lb.novae.observer/cw/PUZZLE_2_7) | |
+| [Motor Controller](https://novae.observer/cw/PUZZLE_2_7) | |
 |
-| [Programmable Delay](https://lb.novae.observer/cw/PUZZLE_3_1) | |
+| [Programmable Delay](https://novae.observer/cw/PUZZLE_3_1) | |
 |
-| [Synchrony Detector](https://lb.novae.observer/cw/PUZZLE_3_2) | |
+| [Synchrony Detector](https://novae.observer/cw/PUZZLE_3_2) | |
 |
-| [AND-OR Combo Gate](https://lb.novae.observer/cw/PUZZLE_3_3) | |
+| [AND-OR Combo Gate](https://novae.observer/cw/PUZZLE_3_3) | |
 |
-| [Switch Debouncer](https://lb.novae.observer/cw/PUZZLE_3_4) | |
+| [Switch Debouncer](https://novae.observer/cw/PUZZLE_3_4) | |
 |
-| [Stepper Motor Driver](https://lb.novae.observer/cw/PUZZLE_3_5) | |
+| [Stepper Motor Driver](https://novae.observer/cw/PUZZLE_3_5) | |
 |
-| [Serial Number ROM](https://lb.novae.observer/cw/PUZZLE_3_6) | |
+| [Serial Number ROM](https://novae.observer/cw/PUZZLE_3_6) | |
 |
-| [Pulse Echo Detector](https://lb.novae.observer/cw/PUZZLE_3_7) | | 
+| [Pulse Echo Detector](https://novae.observer/cw/PUZZLE_3_7) | | 
 

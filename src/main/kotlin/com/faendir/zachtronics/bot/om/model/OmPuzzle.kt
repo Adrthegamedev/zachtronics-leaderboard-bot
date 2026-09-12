@@ -347,7 +347,7 @@ enum class OmPuzzle(
     ;
 
     override val supportedCategories: List<OmCategory> = OmCategory.entries.filter { it.supportsPuzzle(this) }
-    override val link: String = "https://lb.novae.observer/puzzles/$id"
+    override val link: String = "https://novae.observer/puzzles/$id"
 
     val file: File by lazy { ResourceUtils.getFile("classpath:om/puzzle/$id.puzzle") }
 }
