@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.sc.repository;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
 import com.faendir.zachtronics.bot.model.StringFormat;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import com.faendir.zachtronics.bot.repository.SubmitResult;
 import com.faendir.zachtronics.bot.sc.model.*;
@@ -48,8 +48,8 @@ import static com.faendir.zachtronics.bot.sc.model.ScMetric.*;
 public class ScSolutionRepository extends AbstractSolutionRepository<ScCategory, ScPuzzle, ScScore, ScSubmission, ScRecord, ScSolution> {
     private final ScCategory[][] wikiCategories = {{ C,  CNB,  CNP,  CNBP}, { S,  SNB,  SNP,  SNBP},
                                                    {RC, RCNB, RCNP, RCNBP}, {RS, RSNB, RSNP, RSNBP}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.SPACECHEM;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.SPACECHEM;
 
     @Qualifier("scArchiveRepository")
     private final GitRepository gitRepo;
@@ -64,8 +64,6 @@ public class ScSolutionRepository extends AbstractSolutionRepository<ScCategory,
             BiConsumer<ScSubmission, Collection<ScCategory>> successCallback = (sub, wonCategories) -> {
                 access.push();
                 if (!wonCategories.isEmpty()) {
-                    String redditAnnouncement = makeRedditAnnouncement(sub, wonCategories);
-                    postAnnouncementToReddit(redditAnnouncement);
                 }
             };
             return submitOne(access, submission, successCallback);
@@ -82,10 +80,7 @@ public class ScSolutionRepository extends AbstractSolutionRepository<ScCategory,
             Collection<? extends ValidationResult<ScSubmission>> validationResults) {
         try (GitRepository.ReadWriteAccess access = gitRepo.acquireWriteAccess()) {
             List<SubmitResult<ScRecord, ScCategory>> submitResults = new ArrayList<>();
-            StringJoiner redditAnnouncement = new StringJoiner("  \n");
             BiConsumer<ScSubmission, Collection<ScCategory>> successCallback = (sub, wonCategories) -> {
-                if (!wonCategories.isEmpty())
-                    redditAnnouncement.add(makeRedditAnnouncement(sub, wonCategories));
             };
 
             for (ValidationResult<ScSubmission> validationResult : validationResults) {
@@ -99,104 +94,7 @@ public class ScSolutionRepository extends AbstractSolutionRepository<ScCategory,
             }
 
             access.push();
-            if (redditAnnouncement.length() != 0) {
-                postAnnouncementToReddit(redditAnnouncement.toString());
-            }
             return submitResults;
-        }
-    }
-
-    @Override
-    protected void updateRedditLeaderboard(List<String> lines, ScPuzzle puzzle,
-                                           GitRepository.ReadWriteAccess access, List<ScSolution> solutions) {
-
-        Map<ScCategory, ScRecord> recordMap = new EnumMap<>(ScCategory.class);
-        Map<ScCategory, ScRecord> videoRecordMap = new EnumMap<>(ScCategory.class);
-        List<ScRecord> videoRecords = solutions.stream()
-                                               .filter(s -> s.getDisplayLink() != null)
-                                               .map(s -> s.extendToRecord(puzzle, null, null)) // no export needed
-                                               .toList();
-        Path puzzlePath = getPuzzlePath(access, puzzle);
-        for (ScSolution solution: solutions) {
-            ScRecord record = solution.extendToRecord(puzzle,
-                                                      makeArchiveLink(puzzle, solution.getScore()),
-                                                      makeArchivePath(puzzlePath, solution.getScore()));
-            for (ScCategory category : solution.getCategories()) {
-                recordMap.put(category, record);
-                if (record.getDisplayLink() == null) {
-                    videoRecords.stream()
-                                .filter(s -> category.supportsScore(s.getScore()))
-                                .min(Comparator.comparing(ScRecord::getScore, category.getScoreComparator()))
-                                .ifPresent(videoRecord -> videoRecordMap.put(category, videoRecord)); // bosses have no videos at all
-                }
-            }
-        }
-
-        Pattern puzzleRegex = Pattern.compile("^\\| \\[" + Pattern.quote(puzzle.getDisplayName()) + "(?: - |])");
-
-        int rowIdx = 0;
-
-        // | [Puzzle](https://zlbb) | [(**ccc**/r/ss) author](https://li.nk) | ← | [(ccc/r/**ss**) author](https://li.nk) | ←
-        // | [Puzzle - 1 Reactor](https://zlbb) | [(**ccc**/**r**/ss) author](https://li.nk) | ← | [(ccc/**r**/**ss**) author](https://li.nk) | ←
-        for (int lineIdx = 0; lineIdx < lines.size(); lineIdx++) {
-            String line = lines.get(lineIdx);
-            if (puzzleRegex.matcher(line).find()) {
-                String[] prevElems = line.trim().split("\\s*\\|\\s*", -1);
-                int halfSize = (prevElems.length - 2) / 2;
-
-                StringBuilder row = new StringBuilder("| ");
-                int minReactors;
-                String text;
-                String link;
-                if (rowIdx == 0) {
-                    minReactors = Integer.MAX_VALUE;
-                    text = puzzle.getDisplayName();
-                    link = puzzle.getLink();
-                }
-                else {
-                    minReactors = recordMap.get(ScCategory.RC).getScore().getReactors();
-                    text = puzzle.getDisplayName() + " - " + minReactors + " Reactor" + (minReactors == 1 ? "" : "s");
-
-                    int maxReactorsShown = recordMap.get(ScCategory.RCNB).getScore().getReactors();
-                    String filter = String.format("visualizerFilterSc-%s.range.r.max=%d", puzzle.name(), maxReactorsShown);
-                    link = puzzle.getLink() + "?visualizerConfigSc.mode=2D&" + filter;
-                }
-                row.append(Markdown.link(text, link));
-
-                for (int block = 0; block < 2; block++) {
-                    ScCategory[] blockCategories = wikiCategories[2 * rowIdx + block];
-                    @Nullable ScRecord[] blockRecords = Arrays.stream(blockCategories)
-                                                              .map(recordMap::get)
-                                                              .toArray(ScRecord[]::new);
-                    @Nullable ScRecord[] blockVideoRecords = Arrays.stream(blockCategories)
-                                                                   .map(videoRecordMap::get)
-                                                                   .toArray(ScRecord[]::new);
-
-                    for (int i = 0; i < halfSize; i++) {
-                        ScCategory thisCategory = blockCategories[i];
-                        row.append(" | ");
-                        if (blockRecords[i] != null) {
-                            DisplayContext<ScCategory> displayContext = new DisplayContext<>(StringFormat.REDDIT, thisCategory);
-                            String cell = makeLeaderboardCell(blockRecords, i, minReactors, displayContext);
-                            row.append(cell);
-                            if (blockVideoRecords[i] != null) {
-                                String videoCell = makeLeaderboardCell(blockVideoRecords, i, Integer.MAX_VALUE, displayContext);
-                                if (!cell.equals(videoCell))
-                                    row.append(". Top&nbsp;video&nbsp;").append(videoCell);
-                            }
-                        }
-                        else
-                            row.append(prevElems[2 + block * halfSize + i]);
-                    }
-                }
-                lines.set(lineIdx, row.toString());
-
-                rowIdx++;
-            }
-            else if (rowIdx != 0) {
-                // we've already found the point and now we're past it, we're done
-                break;
-            }
         }
     }
 
@@ -214,20 +112,6 @@ public class ScSolutionRepository extends AbstractSolutionRepository<ScCategory,
         return record.toDisplayString(displayContext, reactorPrefix);
     }
 
-    private String makeRedditAnnouncement(ScSubmission submission, Collection<ScCategory> wonCategories) {
-        DisplayContext<ScCategory> context = new DisplayContext<>(StringFormat.REDDIT, wonCategories);
-        return "Added " + Markdown.fileLinkOrEmpty(makeArchiveLink(submission.getPuzzle(), submission.getScore())) +
-               Markdown.linkOrText(submission.getPuzzle().getDisplayName() +
-                                   " (" + submission.getScore().toDisplayString(context) + ")",
-                                   submission.getDisplayLink()) +
-               " by " + submission.getAuthor();
-    }
-
-    private void postAnnouncementToReddit(String content) {
-        // see: https://www.reddit.com/r/spacechem/comments/mmcuzb
-        if (!content.isEmpty())
-            redditService.postInSubmission("mmcuzb", content);
-    }
 
     @Override
     protected ScSolution makeCandidateSolution(ScSubmission submission) {

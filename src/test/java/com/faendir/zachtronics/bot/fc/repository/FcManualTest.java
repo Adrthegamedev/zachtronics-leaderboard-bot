@@ -84,11 +84,11 @@ class FcManualTest {
 
     @Test
     public void rebuildAllWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
-                                .replaceAll("file:[^()]+/foodcourt-leaderboard/",
-                                            "https://raw.githubusercontent.com/lastcallbbs-community-developers/foodcourt-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
+        //                        .replaceAll("file:[^()]+/foodcourt-leaderboard/",
+        //                                    "https://raw.githubusercontent.com/lastcallbbs-community-developers/foodcourt-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

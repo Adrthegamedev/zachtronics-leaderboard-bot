@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.fc.repository;
 import com.faendir.zachtronics.bot.fc.model.*;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -45,8 +45,8 @@ public class FcSolutionRepository extends AbstractSolutionRepository<FcCategory,
                                                    {CTS, CSW, CWT},
                                                    {STC, SCW, SWT},
                                                    {WTC, WCS, WST}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.LASTCALLBBS;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.LASTCALLBBS;
 
     @Qualifier("fcRepository")
     private final GitRepository gitRepo;

@@ -24,8 +24,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/': 'https://zlbb.faendir.com',
-      // '/': 'http://localhost:8080',
+      '/': 'https://lb.novae.observer',
+      // '/': 'http://lb.novae.observer',
     },
   },
 });

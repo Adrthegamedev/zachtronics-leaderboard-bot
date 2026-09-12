@@ -63,7 +63,7 @@ public enum FcPuzzle implements Puzzle<FcCategory> {
         this.supportedCategories = Arrays.stream(FcCategory.values())
                                          .filter(c -> c.getSupportedTypes().contains(type))
                                          .toList();
-        this.link = "https://zlbb.faendir.com/fc/" + name();
+        this.link = "https://lb.novae.observer/fc/" + name();
     }
 
 }

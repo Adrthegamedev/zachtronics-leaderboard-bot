@@ -103,7 +103,7 @@ public enum KzPuzzle implements Puzzle<KzCategory> {
         this.group = group;
         this.prefix = displayName.toLowerCase().replace(' ', '-').replaceAll("[()]", "");
         this.displayName = displayName;
-        this.link = "https://zlbb.faendir.com/kz/" + name();
+        this.link = "https://lb.novae.observer/kz/" + name();
     }
 
 }

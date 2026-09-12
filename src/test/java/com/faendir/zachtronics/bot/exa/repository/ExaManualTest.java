@@ -22,8 +22,8 @@ import com.faendir.zachtronics.bot.config.GitProperties;
 import com.faendir.zachtronics.bot.exa.model.*;
 import com.faendir.zachtronics.bot.exa.validation.Exapt;
 import com.faendir.zachtronics.bot.git.GitRepository;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.CategoryRecord;
 import com.faendir.zachtronics.bot.validation.ValidationException;
 import org.junit.jupiter.api.Disabled;
@@ -50,8 +50,8 @@ public class ExaManualTest {
 
     @Autowired
     private ExaSolutionRepository repository;
-    @Autowired
-    private RedditService redditService;
+    //@Autowired
+    //private RedditService redditService;
 
     @TestConfiguration
     static class RepositoryConfiguration {
@@ -83,11 +83,11 @@ public class ExaManualTest {
 
     @Test
     public void rebuildRedditWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = redditService.getWikiPage(Subreddit.EXAPUNKS, "index")
-                                   .replaceAll("file:[^()]+/leaderboard/",
-                                               "https://raw.githubusercontent.com/12345ieee/exapunks-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = redditService.getWikiPage(Subreddit.EXAPUNKS, "index")
+        //                           .replaceAll("file:[^()]+/leaderboard/",
+        //                                       "https://raw.githubusercontent.com/12345ieee/exapunks-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

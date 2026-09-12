@@ -35,6 +35,9 @@ public class NativeLoader {
         }
         catch (IllegalArgumentException ex) {
             String filename = System.mapLibraryName(libName);
+            if (filename == "liblibverify.so"){
+                filename = "libverify.so";
+            }
             URL url = NativeLoader.class.getClassLoader().getResource("lib/" + filename);
             if (url == null) {
                 throw new IllegalArgumentException("Failed to find shared library " + filename);

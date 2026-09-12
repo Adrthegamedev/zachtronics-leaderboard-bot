@@ -87,7 +87,7 @@ public enum SzPuzzle implements Puzzle<SzCategory> {
         this.supportedCategories = Arrays.stream(SzCategory.values())
                                          .filter(c -> c.getSupportedTypes().contains(type))
                                          .toList();
-        this.link = "https://zlbb.faendir.com/sz/" + id;
+        this.link = "https://lb.novae.observer/sz/" + id;
     }
 
 }

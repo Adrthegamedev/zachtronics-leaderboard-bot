@@ -254,7 +254,7 @@ export default function HelpView() {
                 title="Submitting Solutions"
                 description={
                     <>
-                        To submit a solution, go to <a href="https://zlbb.faendir.com/upload">zlbb.faendir.com/upload</a> and input a name, solution file, and the gif of your solution.
+                        To submit a solution, go to <a href="https://lb.novae.observer/upload">lb.novae.observer/upload</a> and input a name, solution file, and the gif of your solution.
                         <p>Names are not stored on the leaderboard, but the discord bot will still show your name.</p>
                         <p>See <a href="https://events.critelli.technology/static/where.html">this page</a> if you need to find your solution file directory.</p>
                         <p>To find the correct solution file, it may help to sort the folder by most recently updated. Changing anything (then undoing) is sufficient to modify a solution.</p>
@@ -296,7 +296,7 @@ export default function HelpView() {
                 description={
                     <>
                         On the Windows version, it is possible to make the game automatically submit your solutions to the leaderboard.
-                        <p>In your <a href="https://events.critelli.technology/static/where.html">solutions folder</a>, there is a <Code>config.cfg</Code> file somewhere. Within this file, change the <Code>ExternalLeaderboardURLs = </Code> line to <Code>ExternalLeaderboardURLs = https://zlbb.faendir.com/om/game-api/YOUR_NAME</Code>, setting your name appropriately.</p>
+                        <p>In your <a href="https://events.critelli.technology/static/where.html">solutions folder</a>, there is a <Code>config.cfg</Code> file somewhere. Within this file, change the <Code>ExternalLeaderboardURLs = </Code> line to <Code>ExternalLeaderboardURLs = https://lb.novae.observer/om/game-api/YOUR_NAME</Code>, setting your name appropriately.</p>
                         <p>If you are not in Hermit Mode, a solution will be submitted once you finish recording a gif using the ingame gif recorder. Gifs with a large filesize (around 1000+ cycles in the gif) might not get submitted. GIF updates will not be submitted this way.</p>
                     </>
                 }

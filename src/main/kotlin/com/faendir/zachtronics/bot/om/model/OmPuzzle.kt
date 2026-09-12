@@ -30,7 +30,17 @@ enum class OmPuzzle(
     val id: String,
     vararg val altIds: String,
 ) : Puzzle<OmCategory> {
+    //LESSON_INTRODUCTION(PROLOGUE, NORMAL, "Lesson: Introduction", "P044"),
+    //LESSON_ARMS(PROLOGUE, NORMAL, "Lesson: Arms", "P001"),
+    //LESSON_PIVOTS(PROLOGUE, NORMAL, "Lesson: Pivots", "P004"),
+    //LESSON_PISTONS(PROLOGUE, NORMAL, "Lesson: Pistons", "P002"),
+    //LESSON_TRACKS(PROLOGUE, NORMAL, "Lesson: Tracks", "P003"),
+    //LESSON_TRANSMUTATION(PROLOGUE, NORMAL, "Lesson: Transmutation", "P006"),
+    //LESSON_BONDING(PROLOGUE, NORMAL, "Lesson: Bonding", "P005"),
+    //STABILIZED_WATER(PROLOGUE, NORMAL, "Stabilized Water", "P007"),
+
     STABILIZED_WATER(CHAPTER_1, NORMAL, "Stabilized Water", "P007"),
+
     REFINED_GOLD(CHAPTER_1, NORMAL, "Refined Gold", "P010"),
     FACE_POWDER(CHAPTER_1, NORMAL, "Face Powder", "P009"),
     WATERPROOF_SEALANT(CHAPTER_1, NORMAL, "Waterproof Sealant", "P011"),
@@ -337,7 +347,7 @@ enum class OmPuzzle(
     ;
 
     override val supportedCategories: List<OmCategory> = OmCategory.entries.filter { it.supportsPuzzle(this) }
-    override val link: String = "https://zlbb.faendir.com/puzzles/$id"
+    override val link: String = "https://lb.novae.observer/puzzles/$id"
 
     val file: File by lazy { ResourceUtils.getFile("classpath:om/puzzle/$id.puzzle") }
 }

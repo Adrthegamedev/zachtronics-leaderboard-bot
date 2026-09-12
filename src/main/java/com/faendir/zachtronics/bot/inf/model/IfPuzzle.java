@@ -97,7 +97,7 @@ public enum IfPuzzle implements Puzzle<IfCategory> {
         this.supportedCategories = Arrays.stream(IfCategory.values())
                                          .filter(c -> c.getSupportedTypes().contains(type))
                                          .toList();
-        this.link = "https://zlbb.faendir.com/if/" + id;
+        this.link = "https://lb.novae.observer/if/" + id;
     }
 
 }

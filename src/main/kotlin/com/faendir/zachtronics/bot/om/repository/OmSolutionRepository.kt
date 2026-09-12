@@ -58,7 +58,6 @@ import kotlin.io.path.readBytes
 @Component
 class OmSolutionRepository(
     @Qualifier("omLeaderboardRepository") private val leaderboard: GitRepository,
-    private val pageGenerator: OmRedditWikiGenerator,
     private val omUrlMapper: OmUrlMapper,
     private val morsService: MorsService,
     private val gifValidationService: GifValidationService,
@@ -82,7 +81,7 @@ class OmSolutionRepository(
     fun init() {
         leaderboard.acquireReadAccess().use { leaderboardScope ->
             loadData(leaderboardScope)
-            pageGenerator.update(OmCategory.entries, immutableData)
+            //pageGenerator.update(OmCategory.entries, immutableData)
         }
     }
 
@@ -193,7 +192,7 @@ class OmSolutionRepository(
                 else -> null
             }
             if (beatenRecords != null) {
-                pageGenerator.update(beatenRecords.flatMap { it.categories }, immutableData)
+                //pageGenerator.update(beatenRecords.flatMap { it.categories }, immutableData)
                 val rev = leaderboardScope.commit(
                     submission.author,
                     submission.puzzle,
@@ -328,7 +327,7 @@ class OmSolutionRepository(
             }
             leaderboardScope.commitAndPush("Score overrides (metadata)")
             loadData(leaderboardScope)
-            pageGenerator.update(OmCategory.entries, immutableData)
+            //pageGenerator.update(OmCategory.entries, immutableData)
         }
     }
 
@@ -339,7 +338,7 @@ class OmSolutionRepository(
             leaderboardScope.rm(File(dir, "${record.fileStem()}.json"))
             leaderboardScope.commitAndPush(null, record.puzzle, record.score, listOf("DELETE"))
             loadData(leaderboardScope)
-            pageGenerator.update(OmCategory.entries, immutableData)
+            //pageGenerator.update(OmCategory.entries, immutableData)
         }
     }
 
@@ -353,7 +352,7 @@ class OmSolutionRepository(
             }
             leaderboardScope.commitAndPush("Reverify invalid solutions (DELETE)")
             loadData(leaderboardScope)
-            pageGenerator.update(OmCategory.entries, immutableData)
+            //pageGenerator.update(OmCategory.entries, immutableData)
         }
     }
 

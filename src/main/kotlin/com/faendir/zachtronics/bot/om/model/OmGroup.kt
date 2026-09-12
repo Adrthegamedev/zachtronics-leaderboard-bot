@@ -20,6 +20,7 @@ import com.faendir.zachtronics.bot.model.Group
 import com.faendir.zachtronics.bot.om.model.OmCollection.*
 
 enum class OmGroup(val collection: OmCollection, override val displayName: String) : Group {
+    //PROLOGUE(CAMPAIGN, "Prologue"),
     CHAPTER_1(CAMPAIGN, "Chapter I"),
     CHAPTER_2(CAMPAIGN, "Chapter II"),
     CHAPTER_3(CAMPAIGN, "Chapter III"),

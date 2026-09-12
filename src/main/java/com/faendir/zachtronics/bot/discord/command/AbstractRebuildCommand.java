@@ -40,7 +40,7 @@ public abstract class AbstractRebuildCommand<P extends Puzzle<?>> extends Comman
     @Override
     public SafeMessageBuilder handleEvent(ChatInputInteractionEvent event) {
         P maybePuzzle = getPuzzleOption().get(event);
-        getRepository().rebuildRedditLeaderboard(maybePuzzle);
+        //getRepository().rebuildRedditLeaderboard(maybePuzzle);
         return new MultiMessageSafeEmbedMessageBuilder()
             .title((maybePuzzle == null ? "Rebuilt all wiki" : "Rebuilt wiki section of puzzle " + maybePuzzle.getDisplayName()))
             .color(Colors.SUCCESS);

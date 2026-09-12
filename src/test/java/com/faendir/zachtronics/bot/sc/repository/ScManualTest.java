@@ -17,8 +17,8 @@
 package com.faendir.zachtronics.bot.sc.repository;
 
 import com.faendir.zachtronics.bot.BotTest;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.CategoryRecord;
 import com.faendir.zachtronics.bot.sc.model.*;
 import com.faendir.zachtronics.bot.utils.LambdaUtils;
@@ -50,8 +50,8 @@ class ScManualTest {
 
     @Autowired
     private ScSolutionRepository repository;
-    @Autowired
-    private RedditService redditService;
+    //@Autowired
+    //private RedditService redditService;
 
     @Test
     public void testFullIO() {
@@ -81,15 +81,15 @@ class ScManualTest {
     @Test
     public void rebuildAllWiki() {
         // cp -a ../spacechem/archive/* src/test/resources/repositories/sc-archive/
-        repository.rebuildRedditLeaderboard(null);
-
-        String pages = Arrays.stream(ScGroup.values())
-                             .map(ScGroup::getWikiPage).distinct()
-                             .map(p -> redditService.getWikiPage(Subreddit.SPACECHEM, p))
-                             .map(s -> s.replaceAll("file:/tmp/sc-archive[0-9]+/",
-                                                    "https://raw.githubusercontent.com/spacechem-community-developers/spacechem-archive/master"))
-                             .collect(Collectors.joining("\n\n---\n"));
-        System.out.println(pages);
+        //repository.rebuildRedditLeaderboard(null);
+//
+        //String pages = Arrays.stream(ScGroup.values())
+        //                     .map(ScGroup::getWikiPage).distinct()
+        //                     .map(p -> redditService.getWikiPage(Subreddit.SPACECHEM, p))
+        //                     .map(s -> s.replaceAll("file:/tmp/sc-archive[0-9]+/",
+        //                                            "https://raw.githubusercontent.com/spacechem-community-developers/spacechem-archive/master"))
+        //                     .collect(Collectors.joining("\n\n---\n"));
+        //System.out.println(pages);
     }
 
     @Test

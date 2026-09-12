@@ -148,7 +148,7 @@ tasks.assembleFrontend {
 
 val downloadLibraries = tasks.register<Download>("downloadLibraries") {
     val os = OperatingSystem.current()
-    val omsimLib = os.getSharedLibraryName("verify")
+    val omsimLib = os.getSharedLibraryName("libverify")
     val tisLib = os.getSharedLibraryName("TIS100")
     src(
         listOf(

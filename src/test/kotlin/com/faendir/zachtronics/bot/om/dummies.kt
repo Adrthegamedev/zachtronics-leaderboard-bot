@@ -53,4 +53,4 @@ fun dummyOmSubmission(
 ) = OmSubmission(puzzle, score, author, displayLink, data, allowGifUpdate)
 
 fun omSolutionRepoFor(repo: GitRepository) =
-    OmSolutionRepository(repo, mockk(relaxed = true), OmUrlMapper(), mockk(relaxed = true), mockk(relaxed = true))
+    OmSolutionRepository(repo, OmUrlMapper(), mockk(relaxed = true), mockk(relaxed = true))

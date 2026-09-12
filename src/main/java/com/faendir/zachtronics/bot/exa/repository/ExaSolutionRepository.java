@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.exa.repository;
 import com.faendir.zachtronics.bot.exa.model.*;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import com.faendir.zachtronics.bot.utils.Markdown;
 import lombok.AccessLevel;
@@ -44,8 +44,8 @@ import static com.faendir.zachtronics.bot.exa.model.ExaMetric.*;
 @Getter(AccessLevel.PROTECTED)
 public class ExaSolutionRepository extends AbstractSolutionRepository<ExaCategory, ExaPuzzle, ExaScore, ExaSubmission, ExaRecord, ExaSolution> {
     private final ExaCategory[][] wikiCategories = {{CS, CA}, {SC, SA}, {AC, AS}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.EXAPUNKS;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.EXAPUNKS;
 
     @Qualifier("exaRepository")
     private final GitRepository gitRepo;
@@ -62,39 +62,6 @@ public class ExaSolutionRepository extends AbstractSolutionRepository<ExaCategor
     @Override
     protected ExaSolution makeCandidateSolution(ExaSubmission submission) {
         return new ExaSolution(submission.getScore(), submission.getAuthor(), submission.getDisplayLink());
-    }
-
-    @Override
-    protected void updateRedditLeaderboard(List<String> lines, ExaPuzzle puzzle,
-                                           GitRepository.ReadWriteAccess access, List<ExaSolution> solutions) {
-        updateRedditLeaderboard(lines, puzzle, access, solutions, true);
-    }
-    
-    @Override
-    protected List<String> rebuildRedditPage(String page, GitRepository.ReadWriteAccess access) throws IOException {
-        List<String> lines = readRedditWiki(page);
-        for (ExaPuzzle puzzle : trackedPuzzles) {
-            Path puzzlePath = getPuzzlePath(access, puzzle);
-            List<ExaSolution> solutions = unmarshalSolutions(puzzlePath);
-            updateRedditLeaderboard(lines, puzzle, access, solutions, false);
-        }
-        rebuildCheeseTable(lines, access);
-        return lines;
-    }
-
-    protected void updateRedditLeaderboard(List<String> lines, ExaPuzzle puzzle,
-                                           GitRepository.ReadWriteAccess access, List<ExaSolution> solutions,
-                                           boolean doCheese) {
-        super.updateRedditLeaderboard(lines, puzzle, access, solutions);
-
-        if (doCheese && solutions.stream().anyMatch(s -> s.getScore().isCheesy())) {
-            try {
-                rebuildCheeseTable(lines, access);
-            }
-            catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
-        }
     }
 
     private void rebuildCheeseTable(List<String> lines, GitRepository.ReadWriteAccess access) throws IOException {

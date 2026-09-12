@@ -15,7 +15,7 @@ Currently included:
  
 ## Use
 The bot runs in the [unofficial Zachtronics Discord Server](https://discord.gg/98QNzdJ), usable from slash commands.  
-The graphical leaderboard, frontier visualizer and API is hosted at https://zlbb.faendir.com/ .  
+The graphical leaderboard, frontier visualizer and API is hosted at https://lb.novae.observer/ .  
 The official leaderboard copies managed by the bot are in the wiki page of the game subreddits.
 
 ## Set up the leaderboard integration in Opus Magnum

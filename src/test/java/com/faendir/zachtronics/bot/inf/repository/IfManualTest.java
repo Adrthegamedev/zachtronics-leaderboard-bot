@@ -73,11 +73,11 @@ class IfManualTest {
 
     @Test
     public void rebuildAllWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
-                                .replaceAll("file:/tmp/if-leaderboard[0-9]+/",
-                                            "https://raw.githubusercontent.com/12345ieee/infinifactory-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
+        //                        .replaceAll("file:/tmp/if-leaderboard[0-9]+/",
+        //                                    "https://raw.githubusercontent.com/12345ieee/infinifactory-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

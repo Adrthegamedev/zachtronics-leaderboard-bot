@@ -132,7 +132,7 @@ public enum TISPuzzle implements Puzzle<TISCategory> {
             case SANDBOX -> Collections.emptyList();
         };
         this.extraWitnessSeeds = extraWitnessSeeds;
-        this.link = "https://zlbb.faendir.com/tis/" + id;
+        this.link = "https://lb.novae.observer/tis/" + id;
     }
 
 }

@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.fp.repository;
 import com.faendir.zachtronics.bot.fp.model.*;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -43,8 +43,8 @@ import static com.faendir.zachtronics.bot.fp.model.FpMetric.*;
 @Getter(AccessLevel.PROTECTED)
 public class FpSolutionRepository extends AbstractSolutionRepository<FpCategory, FpPuzzle, FpScore, FpSubmission, FpRecord, FpSolution> {
     private final FpCategory[][] wikiCategories = {{RCF, RFC}, {CRF, CFR}, {FRC, FCR}, {wRCF, wFRC}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.LASTCALLBBS;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.LASTCALLBBS;
 
     @Qualifier("fpRepository")
     private final GitRepository gitRepo;
