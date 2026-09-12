@@ -39,7 +39,7 @@ public class OmSimWrapper {
     }
 
     static final Arena LIBRARY_ARENA = Arena.ofAuto();
-    static final SymbolLookup SYMBOL_LOOKUP = NativeLoader.loadLibrary("libverify", LIBRARY_ARENA);
+    static final SymbolLookup SYMBOL_LOOKUP = NativeLoader.loadLibrary("verify", LIBRARY_ARENA);
 
     public static final ValueLayout.OfBoolean C_BOOL = ValueLayout.JAVA_BOOLEAN;
     public static final ValueLayout.OfByte C_CHAR = ValueLayout.JAVA_BYTE;
