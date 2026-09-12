@@ -46,8 +46,9 @@ public class SolRepoSubmitTest {
         assertInstanceOf(SubmitResult.NothingBeaten.class, doSubmitScore(score)); // our score is a P, fail
         score = new ScScore(100, 100, 100, false, false);
         assertInstanceOf(SubmitResult.Updated.class, doSubmitScore(score)); // identical score, different content, accept
-        // NOVAE-IMPORTANT: modified to Updated instead of AlreadyPresent
-        assertInstanceOf(SubmitResult.Updated.class, doSubmitScore(score)); // identical everything, fail
+        // NOVAE-IMPORTANT: modified to Updated instead of AlreadyPresent; EDIT: this may have been windows jank
+        //assertInstanceOf(SubmitResult.Updated.class, doSubmitScore(score)); // identical everything, fail
+        assertInstanceOf(SubmitResult.AlreadyPresent.class, doSubmitScore(score)); // identical everything, fail
         score = new ScScore(10, 100, 1000, true, true);
         assertInstanceOf(SubmitResult.Success.class, doSubmitScore(score)); // new frontier piece
         score = new ScScore(1000, 100, 10, true, true);
@@ -68,8 +69,9 @@ public class SolRepoSubmitTest {
 
         String data = "SOLUTION:A Most Unfortunate Malfunction,12345ieee,45-1-14\nbunch of stuff...";
         assertInstanceOf(SubmitResult.Success.class, doSubmitData(data)); // 45/1/14
-        // NOVAE-IMPORTANT: modified to Updated instead of AlreadyPresent
-        assertInstanceOf(SubmitResult.Updated.class, doSubmitData(data)); // identical
+        // NOVAE-IMPORTANT: modified to Updated instead of AlreadyPresent; EDIT: this may have been windows jank
+        //assertInstanceOf(SubmitResult.Updated.class, doSubmitData(data)); // identical
+        assertInstanceOf(SubmitResult.AlreadyPresent.class, doSubmitData(data)); // identical
 
         data = "SOLUTION:A Most Unfortunate Malfunction,12345ieee,45-1-14\ndifferent stuff...";
         assertInstanceOf(SubmitResult.Updated.class, doSubmitData(data)); // changed data, I can
