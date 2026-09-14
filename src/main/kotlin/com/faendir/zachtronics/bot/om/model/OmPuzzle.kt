@@ -351,15 +351,15 @@ enum class OmPuzzle(
     TINSEL(WAHT_2024, POLYMER_HEIGHT, "Tinsel", "waht2024_p1"),
     CHILDREN_S_TOYS(WAHT_2024, PRODUCTION, "Children's toys", "waht2024_p2"),
 
-    EXTRACTION_FROM_SAPA(SALT_OF_SATURN, PRODUCTION, "Extraction from Sapa", "SOS_Extraction_from_Sapa"),
-    SALT_OF_SATURN_BY_VINEGAR(SALT_OF_SATURN, NORMAL, "Salt of Saturn by Vinegar", "SOS_Salt_of_Saturn_by_Vinegar"),
-    BURNING_SPIRIT_OF_SATURN(SALT_OF_SATURN, NORMAL, "Burning Spirit of Saturn", "SOS_Burning_Spirit_of_Saturn"),
-    MAGISTERY_OF_SATURN(SALT_OF_SATURN, NORMAL, "Magistery of Saturn", "SOS_Magistery_of_Saturn"),
-    SATURN_S_TREE(SALT_OF_SATURN, NORMAL, "Saturn's Tree", "SOS_Saturn's_Tree"),
+    EXTRACTION_FROM_SAPA(SALT_OF_SATURN, PRODUCTION, "Extraction from Sapa", "w3514066608", "SOS_Extraction_from_Sapa"),
+    SWEET_VINEGAR_OF_SATURN(SALT_OF_SATURN, NORMAL, "Sweet Vinegar of Saturn", "w3514067030", "SOS_Salt_of_Saturn_by_Vinegar"),
+    BURNING_SPIRIT_OF_SATURN(SALT_OF_SATURN, NORMAL, "Burning Spirit of Saturn", "w3514067152", "SOS_Burning_Spirit_of_Saturn"),
+    MAGISTERY_OF_SATURN(SALT_OF_SATURN, NORMAL, "Magistery of Saturn", "w3514067476", "SOS_Magistery_of_Saturn"),
+    SATURN_S_TREE(SALT_OF_SATURN, NORMAL, "Saturn's Tree", "w3514067629", "SOS_Saturn's_Tree"),
 
     CORPORATE_WASTE_REDUCTION(TRIXIE, NORMAL, "Corporate Waste Reduction", "c559546529329990"),
     // LAMBENT_LXVII(TRIXIE, NORMAL, "Lambent LXVII", "c589658269721779"),
-    SEPTSTABILIZED_SALT(TRIXIE, NORMAL, "Septstabilized Salt", "HeptstabilizedSalt"),
+    SEPTSTABILIZED_SALT(TRIXIE, PRODUCTION, "Septstabilized Salt", "HeptstabilizedSalt"),
     SIGMAR_S_GARDEN(TRIXIE, NORMAL, "Sigmar's Garden", "c584491287336990"),
 
     GLORP_S_CONSTRUCT(DARK_BRICK, NORMAL, "Glorp's Construct", "GlorpsConstruct"),
@@ -369,6 +369,8 @@ enum class OmPuzzle(
     CRITELLIC_SLAG(DARK_BRICK, NORMAL, "Critellic Slag", "critellic-slag"),
 
     SURRENDIER_FLARE_SALT(FLARE_MODIF, NORMAL, "Surrendier Flare Salt", "c651474216460134"),
+
+    // GRAPHITE_PRESS(CRUX_RESISTANCE, NORMAL, "Graphite Press", "TIEN-1.0graphite_press"),
 
     MY_ARMS_ARE_BOUND(MISC, NORMAL, "My Arms Are Bound", "MyArmsAreBound"),
     COLON_THREE(MISC, NORMAL, ":3", "c558264505561023"),
