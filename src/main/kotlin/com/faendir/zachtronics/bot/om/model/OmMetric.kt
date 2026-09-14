@@ -208,7 +208,9 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object BOUNDING_HEX : Value<Int?>("B", MeasurePoint.VICTORY, OmScore::boundingHex)
 
     data object RATE : Value<Double?>("R", MeasurePoint.INFINITY, OmScore::rate, alias = "C'")
-    data object AREA_INF : Value<LevelValue?>("A", MeasurePoint.INFINITY, OmScore::areaINF)
+    data object AREA_INF : Value<LevelValue?>("A", MeasurePoint.INFINITY, OmScore::areaINF) {
+        override val collapsible: Boolean = false
+    }
     data object HEIGHT_INF : Value<InfinInt?>("H", MeasurePoint.INFINITY, OmScore::heightINF) {
         override val collapsible: Boolean = false
     }
