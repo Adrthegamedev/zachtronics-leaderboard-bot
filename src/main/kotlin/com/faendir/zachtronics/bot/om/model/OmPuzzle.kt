@@ -355,7 +355,7 @@ enum class OmPuzzle(
     SWEET_VINEGAR_OF_SATURN(SALT_OF_SATURN, NORMAL, "Sweet Vinegar of Saturn", "w3514067030", "SOS_Salt_of_Saturn_by_Vinegar"),
     BURNING_SPIRIT_OF_SATURN(SALT_OF_SATURN, NORMAL, "Burning Spirit of Saturn", "w3514067152", "SOS_Burning_Spirit_of_Saturn"),
     MAGISTERY_OF_SATURN(SALT_OF_SATURN, NORMAL, "Magistery of Saturn", "w3514067476", "SOS_Magistery_of_Saturn"),
-    SATURN_S_TREE(SALT_OF_SATURN, NORMAL, "Saturn's Tree", "w3514067629", "SOS_Saturn's_Tree"),
+    SATURN_S_TREE(SALT_OF_SATURN, POLYMER_HEIGHT, "Saturn's Tree", "w3514067629", "SOS_Saturn's_Tree"),
 
     CORPORATE_WASTE_REDUCTION(TRIXIE, NORMAL, "Corporate Waste Reduction", "c559546529329990"),
     // LAMBENT_LXVII(TRIXIE, NORMAL, "Lambent LXVII", "c589658269721779"),
