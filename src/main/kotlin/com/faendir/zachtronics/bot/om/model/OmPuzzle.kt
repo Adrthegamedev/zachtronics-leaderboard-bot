@@ -372,7 +372,7 @@ enum class OmPuzzle(
     STABILIZED_GOLD(WEEKLIES_2022, NORMAL, "Stabilized Gold", "w2868335739", "OM2022Weeklies_StabilizedGold"),
     BRAZING_CATHODE(WEEKLIES_2022, PRODUCTION, "Brazing Cathode", "w2868333715", "OM2022Weeklies_BrazingCathode"),
     QUINTESSENTIAL_AEROGEL(WEEKLIES_2022, NORMAL, "Quintessential Aerogel", "w2860183144", "OM2022Weeklies_QuintessentialAerogel"),
-    HOT_ICE(WEEKLIES_2022, NORMAL, "Hot Ice", "W2868337441", "OM2022Weeklies_HotIce"),
+    HOT_ICE(WEEKLIES_2022, NORMAL, "Hot Ice", "w2868337441", "OM2022Weeklies_HotIce"),
     DEHYDRATED_WATER(WEEKLIES_2022, NORMAL, "Dehydrated Water", "w2868714668", "OM2022Weeklies_DehydratedWater"),
     ICELANDIC_LAVA_SALT(WEEKLIES_2022, NORMAL, "Icelandic Lava Salt", "w2958685026", "OM2022Weeklies_IcelandicLavaSalt"),
 
