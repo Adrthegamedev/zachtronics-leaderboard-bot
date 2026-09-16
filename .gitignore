@@ -8,3 +8,4 @@ compose.yml
 docker-compose.yml
 docker-compose-debug.yml
 .frontend-gradle-plugin
+**/.DS_Store
