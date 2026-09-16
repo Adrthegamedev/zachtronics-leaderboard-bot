@@ -421,15 +421,9 @@ enum class OmPuzzle(
     PRISMATIC_CATALYST(WEEKLIES_2026, NORMAL, "Prismatic Catalyst", "weeklies2026_prismatic-catalyst"),
     VISIBLE_INK(WEEKLIES_2026, NORMAL, "Visible Ink?", "weeklies2026_visible-ink"),
     VAN_BERLO_S_ROTOR(WEEKLIES_2026, NORMAL, "Van Berlo's Rotor", "weeklies2026_van-berlos-rotor"),
-    AQUEOUS_DAGGER(SPEEDSOLVE_1, NORMAL, "Aqueous Dagger", "w3783530687", "weeklies2026_aqueous-dagger"),
+    AQUEOUS_DAGGER(WEEKLIES_2026, NORMAL, "Aqueous Dagger", "w3783530687", "weeklies2026_aqueous-dagger"),
     PAINT_PRESERVER(WEEKLIES_2026, PRODUCTION, "Paint Preserver", "weeklies2026_paint-preserver"),
     FUCK_I_SPILLED_MY_METALS_EVERYWHERE_CAN_YOU_HELP_ME_PICK_THEM_UP(WEEKLIES_2026, NORMAL, "Fuck I Spilled My Metals Everywhere Can You Help Me Pick Them Up", "weeklies2026_fismmecyhmptu"),
-
-    IN_BERLO_S_BASEMENT(ALCHADEMY, NORMAL, "In Berlo's Basement", "w2783659165"),
-    TARICENE(ALCHADEMY, POLYMER_HEIGHT, "Taricene", "Alchademy_Taricene"),
-
-    TINSEL(WAHT_2024, POLYMER_HEIGHT, "Tinsel", "waht2024_p1"),
-    CHILDREN_S_TOYS(WAHT_2024, PRODUCTION, "Children's toys", "waht2024_p2"),
 
     IRRITANT_GAS(SPEEDSOLVE_1, NORMAL, "Irritant Gas", "w2996022264", "c820061207497171"),
     ELEMENTAL_LIFE_STUDY(SPEEDSOLVE_1, NORMAL, "Elemental Life Study", "w2996030147", "c753327415393001"),
@@ -451,6 +445,12 @@ enum class OmPuzzle(
     HEMISPHERE_CHANGE(SPEEDSOLVE_3, PRODUCTION, "Hemisphere Change", "w3087859563", "hemisphere-change"),
     CHROMATIC_ABERRATION(SPEEDSOLVE_3, NORMAL, "Chromatic Aberration", "w3087860569", "chromatic-aberration"),
     GALVANIZATION(SPEEDSOLVE_3, NORMAL, "Galvanization", "w3087864269", "galvanization"),
+
+    TINSEL(WAHT_2024, POLYMER_HEIGHT, "Tinsel", "waht2024_p1"),
+    CHILDREN_S_TOYS(WAHT_2024, PRODUCTION, "Children's toys", "waht2024_p2"),
+
+    IN_BERLO_S_BASEMENT(ALCHADEMY, NORMAL, "In Berlo's Basement", "w2783659165"),
+    TARICENE(ALCHADEMY, POLYMER_HEIGHT, "Taricene", "Alchademy_Taricene"),
 
     EXTRACTION_FROM_SAPA(SALT_OF_SATURN, PRODUCTION, "Extraction from Sapa", "w3514066608", "SOS_Extraction_from_Sapa"),
     SWEET_VINEGAR_OF_SATURN(SALT_OF_SATURN, NORMAL, "Sweet Vinegar of Saturn", "w3514067030", "SOS_Salt_of_Saturn_by_Vinegar"),
