@@ -79,7 +79,8 @@ enum class OmGroup(val collection: OmCollection, override val displayName: Strin
     TRIXIE(CUSTOM, "Trixie Kagami's Tournament Takeover"),
     DARK_BRICK(CUSTOM, "Dark Brick's Miscellaneous Events"),
     FLARE_MODIF(CUSTOM, "Surrender Flare Salt Modifications!"),
-    // CRUX_RESISTANCE(CUSTOM, "Tales of the Crux Resistance"),
+    CRUX_RESISTANCE(CUSTOM, "Tales of the Crux Resistance"),
+    // DISJOINT_JOURNAL_I(CUSTOM, "The Journal of Disjoint Alchemy, Volume I"),
     MISC(CUSTOM, "Miscellaneous"),
     ;
 }
