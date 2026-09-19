@@ -262,7 +262,7 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
 
     data object SUM3H : Sum("SumH", COST, CYCLES, HEIGHT)
     data object SUM4H : Sum("Sum4H", COST, CYCLES, HEIGHT, INSTRUCTIONS)
-    data object SUM3W : SumDouble("SumH", COST, CYCLES, WIDTH)
+    data object SUM3W : SumDouble("SumW", COST, CYCLES, WIDTH)
     data object SUM4W : SumDouble("Sum4W", COST, CYCLES, WIDTH, INSTRUCTIONS)
     data object SUM3B : Sum("SumB", COST, CYCLES, BOUNDING_HEX)
     data object SUM4B : Sum("Sum4B", COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
