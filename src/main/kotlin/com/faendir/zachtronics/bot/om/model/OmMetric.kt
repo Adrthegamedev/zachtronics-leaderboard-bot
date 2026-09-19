@@ -163,6 +163,17 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override val description = subMetrics.joinToString("·") { it.description }
     }
 
+    sealed class ProductNoDisplay(override val displayName: String, vararg metrics: OmMetric<*>) : Computed<Double?> {
+        override val subMetrics = metrics.asList()
+        override val getValueFrom = l@{ score: OmScore ->
+            subMetrics.fold(1.0) { acc, part ->
+                val value = (part.getValueFrom(score) as? Number)?.toDouble() ?: return@l null
+                acc * value
+            }
+        }
+        override val description = subMetrics.joinToString("·") { it.description }
+    }
+
     sealed class Not(
         private val modifier: Modifier,
         override val displayName: String = "!${modifier.displayName}"
@@ -256,9 +267,9 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_CA : Product(CYCLES, AREA)
     data object PRODUCT_CI : Product(CYCLES, INSTRUCTIONS)
 
-    data object PRODUCT_GCA : Product(COST, CYCLES, AREA)
-    data object PRODUCT_GCAI : Product(COST, CYCLES, AREA, INSTRUCTIONS)
-    data object PRODUCT_GCI : Product(COST, CYCLES, INSTRUCTIONS)
+    data object PRODUCT_GCA : ProductNoDisplay("Product", COST, CYCLES, AREA)
+    data object PRODUCT_GCAI : ProductNoDisplay("Product4", COST, CYCLES, AREA, INSTRUCTIONS)
+    data object PRODUCT_GCI : ProductNoDisplay("Product", COST, CYCLES, INSTRUCTIONS)
     data object PRODUCT_INF : Product(COST, RATE, INSTRUCTIONS)
 
     data object SUM3H : Sum("SumH", COST, CYCLES, HEIGHT)
@@ -274,12 +285,12 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_CW : Product(CYCLES, WIDTH)
     data object PRODUCT_CB : Product(CYCLES, BOUNDING_HEX)
 
-    data object PRODUCT_GCH : Product(COST, CYCLES, HEIGHT)
-    data object PRODUCT_GCW : Product(COST, CYCLES, WIDTH)
-    data object PRODUCT_GCB : Product(COST, CYCLES, BOUNDING_HEX)
-    data object PRODUCT_GCHI : Product(COST, CYCLES, HEIGHT, INSTRUCTIONS)
-    data object PRODUCT_GCWI : Product(COST, CYCLES, WIDTH, INSTRUCTIONS)
-    data object PRODUCT_GCBI : Product(COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
+    data object PRODUCT_GCH : ProductNoDisplay("ProductH", COST, CYCLES, HEIGHT)
+    data object PRODUCT_GCW : ProductNoDisplay("ProductW", COST, CYCLES, WIDTH)
+    data object PRODUCT_GCB : ProductNoDisplay("ProductB", COST, CYCLES, BOUNDING_HEX)
+    data object PRODUCT_GCHI : ProductNoDisplay("Product4H", COST, CYCLES, HEIGHT, INSTRUCTIONS)
+    data object PRODUCT_GCWI : ProductNoDisplay("Product4W", COST, CYCLES, WIDTH, INSTRUCTIONS)
+    data object PRODUCT_GCBI : ProductNoDisplay("Product4B", COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
 }
 
 /**
