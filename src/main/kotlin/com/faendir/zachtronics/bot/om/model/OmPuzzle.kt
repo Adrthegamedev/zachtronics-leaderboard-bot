@@ -473,7 +473,6 @@ enum class OmPuzzle(
 
     GRAPHITE_PRESS(CRUX_RESISTANCE, NORMAL, "Graphite Press", "TIEN-1.0graphite_press"),
     // PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
-    // BLASTING_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Blasting Briquette", "USP-2.2blasting_briquette"),
 
     // LEAD_OF_HERMES(DISJOINT_JOURNAL_I, NORMAL, "Lead of Hermes", "DisjointJournal_LeadOfHermes"),
 

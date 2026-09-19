@@ -257,6 +257,7 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_CI : Product(CYCLES, INSTRUCTIONS)
 
     data object PRODUCT_GCA : Product(COST, CYCLES, AREA)
+    data object PRODUCT_GCAI : Product(COST, CYCLES, AREA, INSTRUCTIONS)
     data object PRODUCT_GCI : Product(COST, CYCLES, INSTRUCTIONS)
     data object PRODUCT_INF : Product(COST, RATE, INSTRUCTIONS)
 
@@ -272,6 +273,13 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_CH : Product(CYCLES, HEIGHT)
     data object PRODUCT_CW : Product(CYCLES, WIDTH)
     data object PRODUCT_CB : Product(CYCLES, BOUNDING_HEX)
+
+    data object PRODUCT_GCH : Product(COST, CYCLES, HEIGHT)
+    data object PRODUCT_GCW : Product(COST, CYCLES, WIDTH)
+    data object PRODUCT_GCB : Product(COST, CYCLES, BOUNDING_HEX)
+    data object PRODUCT_GCHI : Product(COST, CYCLES, HEIGHT, INSTRUCTIONS)
+    data object PRODUCT_GCWI : Product(COST, CYCLES, WIDTH, INSTRUCTIONS)
+    data object PRODUCT_GCBI : Product(COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
 }
 
 /**
@@ -351,6 +359,13 @@ object OmMetrics {
             OmMetric.SUM4W,
             OmMetric.SUM4B,
             OmMetric.PRODUCT_GCA,
+            OmMetric.PRODUCT_GCAI,
+            OmMetric.PRODUCT_GCH,
+            OmMetric.PRODUCT_GCHI,
+            OmMetric.PRODUCT_GCW,
+            OmMetric.PRODUCT_GCWI,
+            OmMetric.PRODUCT_GCB,
+            OmMetric.PRODUCT_GCBI,
             OmMetric.PRODUCT_INF,
         )
         OmType.PRODUCTION -> listOf(
@@ -367,6 +382,13 @@ object OmMetrics {
             OmMetric.SUM3I,
             OmMetric.SUM4,
             OmMetric.PRODUCT_GCA,
+            OmMetric.PRODUCT_GCAI,
+            OmMetric.PRODUCT_GCH,
+            OmMetric.PRODUCT_GCHI,
+            OmMetric.PRODUCT_GCW,
+            OmMetric.PRODUCT_GCWI,
+            OmMetric.PRODUCT_GCB,
+            OmMetric.PRODUCT_GCBI,
             OmMetric.PRODUCT_GCI,
             OmMetric.PRODUCT_INF,
         )
