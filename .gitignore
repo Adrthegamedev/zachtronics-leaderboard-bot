@@ -1,5 +1,6 @@
 .vscode
 .gradle
+.kotlin
 .idea
 !.idea/copyright
 *.iml
