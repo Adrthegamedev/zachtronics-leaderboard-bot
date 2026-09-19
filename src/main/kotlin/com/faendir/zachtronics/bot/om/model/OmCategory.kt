@@ -154,12 +154,20 @@ enum class OmCategory(
     GXB(VICTORY_BHEX, NOVERLAP, COST, PRODUCT_CB, displayName = "GXB"),
 
     SUMH(VICTORY_HEIGHT, NOVERLAP, SUM3H, displayName = "SumH"),
-    SUMH(VICTORY_WIDTH, NOVERLAP, SUM3W, displayName = "SumW"),
-    SUMH(VICTORY_BHEX, NOVERLAP, SUM3B, displayName = "SumB"),
+    SUMW(VICTORY_WIDTH, NOVERLAP, SUM3W, displayName = "SumW"),
+    SUMB(VICTORY_BHEX, NOVERLAP, SUM3B, displayName = "SumB"),
 
     SUM4H(VICTORY_HEIGHT, NOVERLAP, OmMetric.SUM4H, displayName = "Sum4H"),
-    SUM4H(VICTORY_WIDTH, NOVERLAP, OmMetric.SUM4W, displayName = "Sum4W"),
-    SUM4H(VICTORY_BHEX, NOVERLAP, OmMetric.SUM4B, displayName = "Sum4B"),
+    SUM4W(VICTORY_WIDTH, NOVERLAP, OmMetric.SUM4W, displayName = "Sum4W"),
+    SUM4B(VICTORY_BHEX, NOVERLAP, OmMetric.SUM4B, displayName = "Sum4B"),
+
+    OSUMH(VICTORY_HEIGHT, ANYTHING_GOES, SUM3H, NOVERLAP, displayName = "OSumH"),
+    OSUMW(VICTORY_WIDTH, ANYTHING_GOES, SUM3W, NOVERLAP, displayName = "OSumW"),
+    OSUMB(VICTORY_BHEX, ANYTHING_GOES, SUM3B, NOVERLAP, displayName = "OSumB"),
+
+    OSUM4H(VICTORY_HEIGHT, ANYTHING_GOES, OmMetric.SUM4H, NOVERLAP, displayName = "OSum4H"),
+    OSUM4W(VICTORY_WIDTH, ANYTHING_GOES, OmMetric.SUM4W, NOVERLAP, displayName = "OSum4W"),
+    OSUM4B(VICTORY_BHEX, ANYTHING_GOES, OmMetric.SUM4B, NOVERLAP, displayName = "OSum4B"),
     ;
 
     override val supportedTypes: Set<OmType> by manifold::supportedTypes
