@@ -141,6 +141,16 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override val description: String = metrics.joinToString("+") { it.description }
     }
 
+    sealed class SumDouble(override val displayName: String, vararg metrics: OmMetric<*>) : Computed<Double?> {
+        override val subMetrics = metrics.asList()
+        override val getValueFrom = l@{ score: OmScore ->
+            subMetrics.sumOf { (it.getValueFrom(score) as? Number)?.toDouble() ?: return@l null }
+        }
+
+        override val description: String = metrics.joinToString("+") { it.description }
+    }
+    
+
     sealed class Product(vararg metrics: OmMetric<*>) : Computed<Double?> {
         override val subMetrics = metrics.asList()
         override val getValueFrom = l@{ score: OmScore ->
@@ -249,6 +259,19 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_GCA : Product(COST, CYCLES, AREA)
     data object PRODUCT_GCI : Product(COST, CYCLES, INSTRUCTIONS)
     data object PRODUCT_INF : Product(COST, RATE, INSTRUCTIONS)
+
+    data object SUM3H : Sum("SumH", COST, CYCLES, HEIGHT)
+    data object SUM4H : Sum("Sum4H", COST, CYCLES, HEIGHT, INSTRUCTIONS)
+    data object SUM3W : SumDouble("SumH", COST, CYCLES, WIDTH)
+    data object SUM4W : SumDouble("Sum4W", COST, CYCLES, WIDTH, INSTRUCTIONS)
+    data object SUM3B : Sum("SumB", COST, CYCLES, BOUNDING_HEX)
+    data object SUM4B : Sum("Sum4B", COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
+    data object PRODUCT_GH : Product(COST, HEIGHT)
+    data object PRODUCT_GW : Product(COST, WIDTH)
+    data object PRODUCT_GB : Product(COST, BOUNDING_HEX)
+    data object PRODUCT_CH : Product(CYCLES, HEIGHT)
+    data object PRODUCT_CW : Product(CYCLES, WIDTH)
+    data object PRODUCT_CB : Product(CYCLES, BOUNDING_HEX)
 }
 
 /**
@@ -320,7 +343,13 @@ object OmMetrics {
     private fun computed(type: OmType? = null) = when (type) {
         OmType.NORMAL, OmType.POLYMER_HEIGHT, OmType.POLYMER_WIDTH, OmType.POLYMER_SKEW -> listOf(
             OmMetric.SUM3A,
+            OmMetric.SUM3H,
+            OmMetric.SUM3W,
+            OmMetric.SUM3B,
             OmMetric.SUM4,
+            OmMetric.SUM4H,
+            OmMetric.SUM4W,
+            OmMetric.SUM4B,
             OmMetric.PRODUCT_GCA,
             OmMetric.PRODUCT_INF,
         )
@@ -332,6 +361,9 @@ object OmMetrics {
         )
         null -> listOf(
             OmMetric.SUM3A,
+            OmMetric.SUM3H,
+            OmMetric.SUM3W,
+            OmMetric.SUM3B,
             OmMetric.SUM3I,
             OmMetric.SUM4,
             OmMetric.PRODUCT_GCA,
