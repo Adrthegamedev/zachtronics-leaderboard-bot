@@ -472,7 +472,8 @@ enum class OmPuzzle(
     SURRENDIER_FLARE_SALT(FLARE_MODIF, NORMAL, "Surrendier Flare Salt", "c651474216460134"),
 
     GRAPHITE_PRESS(CRUX_RESISTANCE, NORMAL, "Graphite Press", "TIEN-1.0graphite_press"),
-    // PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
+    PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
+    // METALLIC_PLASTIC(CRUX_RESISTANCE, NORMAL, "Metallic Plastic", "USP-3.0metallic_plastic"),
 
     // LEAD_OF_HERMES(DISJOINT_JOURNAL_I, NORMAL, "Lead of Hermes", "DisjointJournal_LeadOfHermes"),
 
