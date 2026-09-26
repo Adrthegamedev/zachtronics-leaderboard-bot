@@ -748,11 +748,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rsbuild/core@npm:2.2.7":
-  version: 2.2.7
-  resolution: "@rsbuild/core@npm:2.2.7"
+"@rsbuild/core@npm:2.2.8":
+  version: 2.2.8
+  resolution: "@rsbuild/core@npm:2.2.8"
   dependencies:
-    "@rspack/core": "npm:~2.2.5"
+    "@rspack/core": "npm:~2.2.6"
     "@swc/helpers": "npm:^0.5.23"
   peerDependencies:
     core-js: ">= 3.0.0"
@@ -761,7 +761,7 @@ __metadata:
       optional: true
   bin:
     rsbuild: ./bin/rsbuild.js
-  checksum: 10c0/a794cbbd3b63a40753b572669839f8a9e38d2f252bdedd36abe56b7acbc061767281c9a7fd81455081578a13b9b347ab494de16a75a0b2dcedc02d40addcd326
+  checksum: 10c0/49ae761e2beb74c9e285f5d76e3a69fcad56db551ef4f4e651c049813a07ed6f4f6f0aff05dbe98a92e8f17f33a004cf60f2e9f372b035831ef4d5d79624fb3d
   languageName: node
   linkType: hard
 
@@ -933,7 +933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rspack/core@npm:~2.2.5":
+"@rspack/core@npm:~2.2.6":
   version: 2.2.6
   resolution: "@rspack/core@npm:2.2.6"
   dependencies:
@@ -1067,12 +1067,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:24.13.5":
-  version: 24.13.5
-  resolution: "@types/node@npm:24.13.5"
+"@types/node@npm:24.13.6":
+  version: 24.13.6
+  resolution: "@types/node@npm:24.13.6"
   dependencies:
     undici-types: "npm:~7.18.0"
-  checksum: 10c0/f6c7f564e7b16670bc72ce119f2aaba0f6d6ebb886c13d8cd3656a96e4825d91d826be3d0995fc776df4e19eceb4d3074e5e18d54ce1aebd3f6e0ba12b9108cb
+  checksum: 10c0/b6302b2ede891e3a583a6e9c75390e8bc0fb8a99ea81c61ed029c244426550f1508ebae4ba1acf32840fb22a7df461f1e87b449043a8f906240b31a090866c1a
   languageName: node
   linkType: hard
 
@@ -2366,12 +2366,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.9.7":
-  version: 3.9.7
-  resolution: "prettier@npm:3.9.7"
+"prettier@npm:3.9.8":
+  version: 3.9.8
+  resolution: "prettier@npm:3.9.8"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/3bb72e3fd0292695fe1b808a7a3b67a0d68842c780f01ebca7ff1cf2fe05055478dccb513a8d022be59b3494497b4a3b6dc059baee116c1debe69bded535567b
+  checksum: 10c0/257e5ef11ba5006d0b0712271705701c065c8003e07763f996ce185d39633902f3fe1f814839eed76f75c97b6d5376d6157bd9f44db18cacb1dbdcb263cc66ae
   languageName: node
   linkType: hard
 
@@ -3040,13 +3040,13 @@ __metadata:
     "@mui/lab": "npm:7.0.0"
     "@mui/material": "npm:9.4.0"
     "@mui/styles": "npm:6.4.8"
-    "@rsbuild/core": "npm:2.2.7"
+    "@rsbuild/core": "npm:2.2.8"
     "@rsbuild/plugin-react": "npm:2.1.0"
     "@simbathesailor/use-what-changed": "npm:2.0.0"
     "@sinclair/typebox": "npm:0.34.52"
     "@types/d3-format": "npm:3.0.4"
     "@types/jest": "npm:30.0.0"
-    "@types/node": "npm:24.13.5"
+    "@types/node": "npm:24.13.6"
     "@types/plotly.js": "npm:3.0.13"
     "@types/react": "npm:19.3.0"
     "@types/react-dom": "npm:19.3.0"
@@ -3055,7 +3055,7 @@ __metadata:
     d3-format: "npm:3.1.2"
     deep-object-diff: "npm:1.1.9"
     plotly.js-gl3d-dist-min: "npm:3.7.0"
-    prettier: "npm:3.9.7"
+    prettier: "npm:3.9.8"
     react: "npm:19.3.0"
     react-cool-dimensions: "npm:3.0.1"
     react-dom: "npm:19.3.0"
