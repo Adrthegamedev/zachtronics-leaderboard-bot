@@ -475,7 +475,8 @@ enum class OmPuzzle(
     PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
     // METALLIC_PLASTIC(CRUX_RESISTANCE, NORMAL, "Metallic Plastic", "USP-3.0metallic_plastic"),
 
-    // LEAD_OF_HERMES(DISJOINT_JOURNAL_I, NORMAL, "Lead of Hermes", "DisjointJournal_LeadOfHermes"),
+    LEAD_OF_HERMES(DISJOINT_JOURNAL_I, NORMAL, "Lead of Hermes", "DisjointJournal_LeadOfHermes"),
+    // SALT_OF_SELENE(DISJOINT_JOURNAL_I, NORMAL, "Salt of Selene", "DisjointJournal_SaltOfSelene"),
 
     MY_ARMS_ARE_BOUND(MISC, NORMAL, "My Arms Are Bound", "MyArmsAreBound"),
     COLON_THREE(MISC, NORMAL, ":3", "c558264505561023"),
