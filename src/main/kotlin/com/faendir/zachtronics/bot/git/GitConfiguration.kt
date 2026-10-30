@@ -46,8 +46,8 @@ class GitConfiguration(private val gitProperties: GitProperties) {
     @Bean("omRepository")
     fun omRepository() = GitRepository(gitProperties, "om-leaderboard", "https://github.com/Adrthegamedev/om-leaderboard.git")
 
-    @Bean("scArchiveRepository")
-    fun scArchiveRepository() = GitRepository(gitProperties, "sc-archive", "https://github.com/Adrthegamedev/spacechem-archive.git")
+    @Bean("scRepository")
+    fun scRepository() = GitRepository(gitProperties, "sc-leaderboard", "https://github.com/Adrthegamedev/spacechem-archive.git")
 
     @Bean("szRepository")
     fun szRepository() = GitRepository(gitProperties, "shenzhenIO-leaderboard", "https://github.com/Adrthegamedev/shenzhenIO-leaderboard.git")

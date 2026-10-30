@@ -1,0 +1,17 @@
+discord:
+    token: ''
+git:
+    accessToken: ''
+    username: zachtronics-bot-test
+reddit:
+    accessToken: ''
+    clientId: zachtronics-bot-test
+    password: ''
+    username: zachtronics-bot-test
+mors:
+    apiKey: ''
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        banner-mode: 'off'
+        lazy-initialization: true
