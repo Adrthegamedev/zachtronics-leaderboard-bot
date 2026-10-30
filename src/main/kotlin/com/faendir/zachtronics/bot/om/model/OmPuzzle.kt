@@ -486,10 +486,15 @@ enum class OmPuzzle(
 
     GRAPHITE_PRESS(CRUX_RESISTANCE, NORMAL, "Graphite Press", "TIEN-1.0graphite_press"),
     PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
-    // METALLIC_PLASTIC(CRUX_RESISTANCE, NORMAL, "Metallic Plastic", "USP-3.0metallic_plastic"),
+    METALLIC_PLASTIC(CRUX_RESISTANCE, NORMAL, "Metallic Plastic", "USP-3.0metallic_plastic"),
+    SURGE_ALLOY(CRUX_RESISTANCE, NORMAL, "Surge Alloy", "USP-4.0surge_alloy.puzzle"),
 
     LEAD_OF_HERMES(DISJOINT_JOURNAL_I, NORMAL, "Lead of Hermes", "DisjointJournal_LeadOfHermes"),
-    // SALT_OF_SELENE(DISJOINT_JOURNAL_I, NORMAL, "Salt of Selene", "DisjointJournal_SaltOfSelene"),
+    SALT_OF_SELENE(DISJOINT_JOURNAL_I, NORMAL, "Salt of Selene", "DisjointJournal_SaltOfSelene"),
+    SILK_OF_NEPTUNE(DISJOINT_JOURNAL_I, POLYMER_HEIGHT, "Silk of Neptune", "DisjointJournal_SilkOfNeptune"),
+    ASH_OF_VULCAN(DISJOINT_JOURNAL_I, PRODUCTION, "Ash of Vulcan", "DisjointJournal_AshOfVulcan"),
+
+    // ODD_BEVERAGE(ALCHEMIST_FOR_HIRE, NORMAL, "Odd Beverage", "AFH1_OddBeverage"),
 
     MY_ARMS_ARE_BOUND(MISC, NORMAL, "My Arms Are Bound", "MyArmsAreBound"),
     COLON_THREE(MISC, NORMAL, ":3", "c558264505561023"),
