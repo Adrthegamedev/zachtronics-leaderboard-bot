@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,10 @@ import { VisualizerColor } from "../../utils/VisualizerColor"
 import Puzzle from "../../model/Puzzle"
 import SzScore from "../../model/sz/SzScore"
 import fetchFromApi from "../../utils/fetchFromApi"
-import { RecordModal } from "../../components/RecordModal"
-import { useState } from "react"
-import RecordDTO from "../../model/RecordDTO"
 
 export default function SzPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
+    const puzzleId = useParams().puzzleId!
     fetchFromApi<Puzzle>(`/sz/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - Shenzhen I/O Leaderboard`))
-    const [activeRecords, setActiveRecords] = useState<RecordDTO<SzScore>[] | undefined>(undefined)
 
     return (
         <Box
@@ -57,9 +53,7 @@ export default function SzPuzzleVisualizerView() {
                 }}
                 modifiers={{}}
                 defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} />
         </Box>
     )
 }

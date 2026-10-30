@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 import { useTheme } from "@mui/material"
-import { ComponentType } from "react"
+import { ComponentType, memo } from "react"
 import RecordDTO, { isStrictlyBetterInMetrics } from "../../../model/RecordDTO"
 import { LayoutAxis, PlotData } from "plotly.js"
 import { PlotParams } from "react-plotly.js"
@@ -76,7 +76,7 @@ function SizeAwarePlotView<SCORE, RECORD extends RecordDTO<SCORE>>({
     const gridColor = theme.palette.mode === "light" ? theme.palette.grey["200"] : theme.palette.grey["800"]
     const makeAxis = (axis: { metric: Metric<SCORE>; scale: "linear" | "log" }): Partial<LayoutAxis> => {
         return {
-            title: axis.metric.name,
+            title: { text: axis.metric.name },
             color: theme.palette.text.primary,
             gridcolor: gridColor,
             zerolinecolor: gridColor,
@@ -204,7 +204,7 @@ function SizeAwarePlotView<SCORE, RECORD extends RecordDTO<SCORE>>({
     )
 }
 
-export default function PlotView<SCORE, RECORD extends RecordDTO<SCORE>>(props: PlotViewProps<SCORE, RECORD>) {
+function PlotView<SCORE, RECORD extends RecordDTO<SCORE>>(props: PlotViewProps<SCORE, RECORD>) {
     const { observe, width, height } = useDimensions()
     return (
         <div ref={observe} style={{ minWidth: 0, flex: 1 }}>
@@ -212,3 +212,5 @@ export default function PlotView<SCORE, RECORD extends RecordDTO<SCORE>>(props: 
         </div>
     )
 }
+
+export default memo(PlotView) as typeof PlotView

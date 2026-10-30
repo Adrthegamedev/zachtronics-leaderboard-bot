@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,12 @@ import { useParams } from "react-router-dom"
 import { Visualizer } from "../../../../components/visualizer/Visualizer"
 import { VisualizerColor } from "../../../../utils/VisualizerColor"
 import OmScore from "../../../../model/om/OmScore"
-import { useState } from "react"
 import { OmRecord } from "../../../../model/om/OmRecord"
-import { RecordModal } from "../../../../components/RecordModal"
 import OmRecordCard from "../../../../components/OmRecordCard"
+import { marshalLevelValue } from "../../../../model/LevelValue"
 
 export default function OmPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
-    const [activeRecords, setActiveRecords] = useState<OmRecord[] | undefined>(undefined)
+    const puzzleId = useParams().puzzleId!
 
     return (
         <>
@@ -50,11 +48,10 @@ export default function OmPuzzleVisualizerView() {
                     w: { name: "Width", get: (score) => score?.width },
                     b: { name: "Bounding Hex", get: (score) => score?.boundingHex },
                     r: { name: "Rate", get: (score) => score?.rate },
-                    aI: { name: "Area@∞", get: (score) => score?.areaINFValue != null && score?.areaINFLevel != null ?
-                                                          score.areaINFValue * 10 ** (5 * score.areaINFLevel) : undefined},
-                    hI: { name: "Height@∞", get: (score) => score?.heightINF },
-                    wI: { name: "Width@∞", get: (score) => score?.widthINF },
-                    bI: { name: "Bounding Hex@∞", get: (score) => score?.boundingHexINF },
+                    aI: { name: "Area@∞", get: (score) => marshalLevelValue(score?.areaINF) },
+                    hI: { name: "Height@∞", get: (score) => marshalLevelValue(score?.heightINF) },
+                    wI: { name: "Width@∞", get: (score) => marshalLevelValue(score?.widthINF) },
+                    bI: { name: "Bounding Hex@∞", get: (score) => marshalLevelValue(score?.boundingHexINF) },
                 }}
                 modifiers={{
                     overlap: {
@@ -73,11 +70,18 @@ export default function OmPuzzleVisualizerView() {
                         option1: "Trackless",
                         option2: "With Track",
                     },
+                    looping: {
+                        get: (score) => score?.looping,
+                        name: "looping",
+                        color: VisualizerColor.DEFAULT,
+                        legendOrder: 2,
+                        option1: "Looping",
+                        option2: "Not Looping",
+                    },
                 }}
-                defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
+                defaultColor={VisualizerColor.BAD3} // default is looping
+                RecordCardComponent={OmRecordCard}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} RecordCardComponent={OmRecordCard} />
         </>
     )
 }
