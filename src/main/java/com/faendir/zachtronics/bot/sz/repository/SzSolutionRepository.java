@@ -18,8 +18,8 @@ package com.faendir.zachtronics.bot.sz.repository;
 
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import com.faendir.zachtronics.bot.sz.model.*;
 import lombok.AccessLevel;
@@ -43,8 +43,8 @@ import static com.faendir.zachtronics.bot.sz.model.SzMetric.*;
 @Getter(AccessLevel.PROTECTED)
 public class SzSolutionRepository extends AbstractSolutionRepository<SzCategory, SzPuzzle, SzScore, SzSubmission, SzRecord, SzSolution> {
     private final SzCategory[][] wikiCategories = {{CP, CL}, {PC, PL}, {LC, LP}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.SHENZHEN_IO;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.SHENZHEN_IO;
 
     @Qualifier("szRepository")
     private final GitRepository gitRepo;

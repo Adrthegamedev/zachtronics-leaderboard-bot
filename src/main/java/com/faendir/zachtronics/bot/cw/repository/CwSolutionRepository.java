@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.cw.repository;
 import com.faendir.zachtronics.bot.cw.model.*;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -42,8 +42,8 @@ import static com.faendir.zachtronics.bot.cw.model.CwCategory.SIZE;
 @Getter(AccessLevel.PROTECTED)
 public class CwSolutionRepository extends AbstractSolutionRepository<CwCategory, CwPuzzle, CwScore, CwSubmission, CwRecord, CwSolution> {
     private final CwCategory[][] wikiCategories = {{SIZE}, {FOOTPRINT}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.LASTCALLBBS;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.LASTCALLBBS;
 
     @Qualifier("cwRepository")
     private final GitRepository gitRepo;

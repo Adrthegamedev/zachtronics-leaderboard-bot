@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.repository;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.*;
 import com.faendir.zachtronics.bot.model.Record;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.utils.CompareResult;
 import com.faendir.zachtronics.bot.utils.Markdown;
 import com.faendir.zachtronics.bot.utils.OrderingKt;
@@ -52,8 +52,8 @@ public abstract class AbstractSolutionRepository<C extends Enum<C> & CategoryJav
                                                  Sub extends Submission<C, P>, R extends Record<C>, Sol extends Solution<C, P, S, R>>
         implements SolutionRepository<C, P, Sub, R> {
 
-    protected abstract RedditService getRedditService();
-    protected abstract Subreddit getSubreddit();
+    //protected abstract RedditService getRedditService();
+    //protected abstract Subreddit getSubreddit();
     /** For each column, every category in order of appearance */
     protected abstract C[][] getWikiCategories();
 
@@ -137,12 +137,12 @@ public abstract class AbstractSolutionRepository<C extends Enum<C> & CategoryJav
             Set<C> wonCategories = submissionSolution.getCategories();
             if (!wonCategories.isEmpty()) {
                 // write the reddit lb, as there are changes to write
-                List<String> lines = readRedditWiki(wikiPageName(puzzle));
-                updateRedditLeaderboard(lines, puzzle, access, solutions);
+                //List<String> lines = readRedditWiki(wikiPageName(puzzle));
+                //updateRedditLeaderboard(lines, puzzle, access, solutions);
 
                 String updateMessage = puzzle.getDisplayName() + " " + submission.getScore().toDisplayString() +
                                        " by " + submission.getAuthor();
-                getRedditService().updateWikiPage(getSubreddit(), wikiPageName(puzzle), String.join("\n", lines), updateMessage);
+                //getRedditService().updateWikiPage(getSubreddit(), wikiPageName(puzzle), String.join("\n", lines), updateMessage);
             }
             successCallback.accept(submission, wonCategories);
         }
@@ -330,79 +330,6 @@ public abstract class AbstractSolutionRepository<C extends Enum<C> & CategoryJav
         }
     }
 
-    public void rebuildRedditLeaderboard(@Nullable P maybePuzzle) {
-        try (GitRepository.ReadWriteAccess access = getGitRepo().acquireWriteAccess()) {
-            if (maybePuzzle != null) {
-                String page = wikiPageName(maybePuzzle);
-                List<String> lines = readRedditWiki(page);
-                Path puzzlePath = getPuzzlePath(access, maybePuzzle);
-                List<Sol> solutions = unmarshalSolutions(puzzlePath);
-                updateRedditLeaderboard(lines, maybePuzzle, access, solutions);
-                getRedditService().updateWikiPage(getSubreddit(), page, String.join("\n", lines),
-                                                  "Manual wiki rebuild for " + maybePuzzle.getDisplayName());
-            }
-            else {
-                Set<String> pages = getTrackedPuzzles().stream()
-                                                       .map(this::wikiPageName)
-                                                       .collect(Collectors.toSet());
-                for (String page : pages) {
-                    List<String> lines = rebuildRedditPage(page, access);
-                    getRedditService().updateWikiPage(getSubreddit(), page, String.join("\n", lines), "Manual wiki rebuild");
-                }
-            }
-        }
-        catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    /** @return mutable list of wiki lines */
-    protected List<String> readRedditWiki(String page) {
-        return Pattern.compile("\\r?\\n")
-                      .splitAsStream(getRedditService().getWikiPage(getSubreddit(), page))
-                      .collect(Collectors.toList());
-    }
-
-    /** @param lines mutable list of wiki lines, it will be updated in place */
-    protected void updateRedditLeaderboard(List<String> lines, P puzzle, GitRepository.ReadWriteAccess access,
-                                           List<Sol> solutions) {
-        Pattern puzzleRegex = Pattern.compile("^\\| \\[" + Pattern.quote(puzzle.getDisplayName()) + "]");
-
-        ListIterator<String> it = lines.listIterator();
-
-        // | [Puzzle](https://zlbb) | [(**c**/pp/l)](https://cp.txt) | [(c/**pp**/l)](https://pc.txt) | [(c/pp/**l**)](https://lc.txt)
-        // |                        | [(**c**/pp/l)](https://cl.txt) |                                | [(c/pp/**l**)](https://lp.txt)
-        while (it.hasNext()) {
-            String line = it.next();
-            if (puzzleRegex.matcher(line).find()) {
-                it.remove();
-                break;
-            }
-        }
-
-        while (it.hasNext()) {
-            String line = it.next();
-            if (line.equals("|") || line.isBlank()) {
-                it.previous();
-                break;
-            } else {
-                it.remove();
-            }
-        }
-
-        Path puzzlePath = getPuzzlePath(access, puzzle);
-        Map<C, R> recordMap = new EnumMap<>(getCategoryClass());
-        for (Sol solution : solutions) {
-            R record = solution.extendToRecord(puzzle,
-                                               makeArchiveLink(puzzle, solution.getScore()),
-                                               makeArchivePath(puzzlePath, solution.getScore()));
-            for (C category : solution.getCategories()) {
-                recordMap.put(category, record);
-            }
-        }
-        addPuzzleLines(it, puzzle, getWikiCategories(), recordMap, Markdown.link(puzzle.getDisplayName(), puzzle.getLink()));
-    }
-
     protected void addPuzzleLines(ListIterator<String> it, P puzzle, C[][] categories, Map<C, R> recordMap,
                                   String puzzleHeader) {
         List<List<R>> recordsByColumn = Arrays.stream(categories)
@@ -441,18 +368,6 @@ public abstract class AbstractSolutionRepository<C extends Enum<C> & CategoryJav
             }
             it.add(row.toString());
         }
-    }
-
-    protected List<String> rebuildRedditPage(String page, GitRepository.ReadWriteAccess access)
-    throws IOException {
-        List<String> lines = readRedditWiki(page);
-        List<P> puzzles = getTrackedPuzzles().stream().filter(p -> wikiPageName(p).equals(page)).toList();
-        for (P puzzle : puzzles) {
-            Path puzzlePath = getPuzzlePath(access, puzzle);
-            List<Sol> solutions = unmarshalSolutions(puzzlePath);
-            updateRedditLeaderboard(lines, puzzle, access, solutions);
-        }
-        return lines;
     }
 
     protected Path getPuzzlePath(GitRepository.ReadAccess access, P puzzle) {

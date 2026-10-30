@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.kz.repository;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.kz.model.*;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -42,8 +42,8 @@ import static com.faendir.zachtronics.bot.kz.model.KzMetric.*;
 @Getter(AccessLevel.PROTECTED)
 public class KzSolutionRepository extends AbstractSolutionRepository<KzCategory, KzPuzzle, KzScore, KzSubmission, KzRecord, KzSolution> {
     private final KzCategory[][] wikiCategories = {{TC, TA}, {CT, CA}, {AT, AC}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.KAIZEN;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.KAIZEN;
 
     @Qualifier("kzRepository")
     private final GitRepository gitRepo;

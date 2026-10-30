@@ -20,6 +20,7 @@ import com.faendir.zachtronics.bot.model.Group
 import com.faendir.zachtronics.bot.om.model.OmCollection.*
 
 enum class OmGroup(val collection: OmCollection, override val displayName: String) : Group {
+    //PROLOGUE(CAMPAIGN, "Prologue"),
     CHAPTER_1(CAMPAIGN, "Chapter I"),
     CHAPTER_2(CAMPAIGN, "Chapter II"),
     CHAPTER_3(CAMPAIGN, "Chapter III"),
@@ -63,5 +64,24 @@ enum class OmGroup(val collection: OmCollection, override val displayName: Strin
     TOURNAMENT_2026(COMMUNITY, "Tournament 2026"),
     WEEKLIES_1(COMMUNITY, "Best Of Weeklies 1"),
     WEEKLIES_2(COMMUNITY, "Best Of Weeklies 2"),
+
+    WEEKLIES_2021(CUSTOM, "Weeklies 2021"),
+    WEEKLIES_2022(CUSTOM, "Weeklies 2022"),
+    WEEKLIES_2023(CUSTOM, "Weeklies 2023"),
+    WEEKLIES_2024(CUSTOM, "Weeklies 2024"),
+    WEEKLIES_2025(CUSTOM, "Weeklies 2025"),
+    WEEKLIES_2026(CUSTOM, "Weeklies 2026"),
+    SPEEDSOLVE_1(CUSTOM, "Speed Solve Season 1"),
+    SPEEDSOLVE_2(CUSTOM, "Speed Solve Season 2"),
+    SPEEDSOLVE_3(CUSTOM, "Speed Solve Season 3"),
+    WAHT_2024(CUSTOM, "Whose Ad-Hoc Tournament 2024"),
+    ALCHADEMY(CUSTOM, "Alchademy"),
+    SALT_OF_SATURN(CUSTOM, "The Method of the Salt of Saturn"),
+    TRIXIE(CUSTOM, "Trixie Kagami's Tournament Takeover"),
+    DARK_BRICK(CUSTOM, "Dark Brick's Miscellaneous Events"),
+    FLARE_MODIF(CUSTOM, "Surrender Flare Salt Modifications!"),
+    CRUX_RESISTANCE(CUSTOM, "Tales of the Crux Resistance"),
+    DISJOINT_JOURNAL_I(CUSTOM, "The Journal of Disjoint Alchemy, Volume I"),
+    MISC(CUSTOM, "Miscellaneous"),
     ;
 }

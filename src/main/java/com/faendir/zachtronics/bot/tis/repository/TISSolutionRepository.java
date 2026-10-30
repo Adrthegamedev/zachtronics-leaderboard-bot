@@ -18,8 +18,8 @@ package com.faendir.zachtronics.bot.tis.repository;
 
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import com.faendir.zachtronics.bot.tis.model.*;
 import com.faendir.zachtronics.bot.utils.Markdown;
@@ -52,8 +52,8 @@ import static java.util.stream.Collectors.*;
 @Getter(AccessLevel.PROTECTED)
 public class TISSolutionRepository extends AbstractSolutionRepository<TISCategory, TISPuzzle, TISScore, TISSubmission, TISRecord, TISSolution> {
     private final TISCategory[][] wikiCategories = {{CN, CI, CX}, {NC, NI, NX}, {IC, IN, IX}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.TIS100;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.TIS100;
 
     @Qualifier("tisRepository")
     private final GitRepository gitRepo;
@@ -72,151 +72,6 @@ public class TISSolutionRepository extends AbstractSolutionRepository<TISCategor
     @Override
     protected TISSolution makeCandidateSolution(TISSubmission submission) {
         return new TISSolution(submission.getScore(), submission.getAuthor(), submission.getDisplayLink());
-    }
-
-    @Override
-    protected void updateRedditLeaderboard(List<String> lines, TISPuzzle puzzle,
-                                           GitRepository.ReadWriteAccess access, List<TISSolution> solutions) {
-        // we need to update data that relies on the whole solution list (like totals), don't even try a single update
-        lines.clear();
-        try {
-            lines.addAll(rebuildRedditPage(wikiPageName(null), access));
-        }
-        catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    @Override
-    protected List<String> rebuildRedditPage(String page, GitRepository.ReadWriteAccess access) throws IOException {
-        final String anchorPoint = "# TIS-100 SEGMENT MAP";
-        List<String> lines = readRedditWiki(page).stream()
-                                                 .takeWhile(l -> !l.equals(anchorPoint))
-                                                 .collect(toList());
-        ListIterator<String> it = lines.listIterator(lines.size());
-
-        Consumer<String> addPuzzleTableHeader =
-            head -> {
-                it.add(String.format("# %s", head));
-                it.add("");
-                it.add("| Puzzle | Cycles | Nodes | Instructions");
-                it.add("| --- | --- | --- | --- | ---");
-            };
-
-        List<TISSolution> allSolutions = new ArrayList<>();
-        Map<TISPuzzle, Map<TISCategory, TISRecord>> data = new EnumMap<>(TISPuzzle.class);
-        for (TISPuzzle puzzle : trackedPuzzles) {
-            Path puzzlePath = getPuzzlePath(access, puzzle);
-            List<TISSolution> solutions = unmarshalSolutions(puzzlePath);
-            allSolutions.addAll(solutions);
-
-            Map<TISCategory, TISRecord> recordMap = new EnumMap<>(TISCategory.class);
-            for (TISSolution solution : solutions) {
-                TISRecord record = solution.extendToRecord(puzzle,
-                                                   makeArchiveLink(puzzle, solution.getScore()),
-                                                   makeArchivePath(puzzlePath, solution.getScore()));
-                for (TISCategory category : solution.getCategories()) {
-                    recordMap.put(category, record);
-                }
-            }
-            data.put(puzzle, recordMap);
-        }
-
-        for (TISGroup group : TISGroup.values()) {
-            int totalCycles = 0;
-            int totalNodes = 0;
-            int totalInstructions = 0;
-            addPuzzleTableHeader.accept(group.getDisplayName());
-            Iterable<TISPuzzle> puzzles = trackedPuzzles.stream().filter(p -> p.getGroup() == group)::iterator;
-            for (TISPuzzle puzzle : puzzles) {
-                Map<TISCategory, TISRecord> recordMap = data.get(puzzle);
-
-                addPuzzleLines(it, puzzle, wikiCategories, recordMap, Markdown.link(puzzle.getDisplayName(), puzzle.getLink()));
-                it.add("|");
-
-                if (recordMap.containsKey(wikiCategories[0][0])) {
-                    totalCycles += recordMap.get(wikiCategories[0][0]).getScore().getCycles();
-                    totalNodes += recordMap.get(wikiCategories[1][0]).getScore().getNodes();
-                    totalInstructions += recordMap.get(wikiCategories[2][0]).getScore().getInstructions();
-                }
-            }
-            it.add(String.format("| **Totals** | **%d** | **%d** | **%d**", totalCycles, totalNodes, totalInstructions));
-            it.add("");
-        }
-
-        {
-            int totalCycles = 0;
-            int totalNodes = 0;
-            int totalInstructions = 0;
-            addPuzzleTableHeader.accept("Achievement Solutions");
-            Iterable<TISPuzzle> achievPuzzles = trackedPuzzles.stream().filter(p -> p.getAchievement() != null)::iterator;
-            TISCategory[][] achievCategories = {{aCN, aCI, aCX, acCN, acCI, acCX},
-                                                {aNC, aNI, aNX, acNC, acNI, acNX},
-                                                {aIC, aIN, aIX, acIC, acIN, acIX}};
-            for (TISPuzzle puzzle : achievPuzzles) {
-                Map<TISCategory, TISRecord> recordMap = data.get(puzzle);
-
-                String link = puzzle.getLink() + "?visualizerFilterTIS-" + puzzle.getId().replace('.', '-') + ".modifiers.achievement=true";
-                String puzzleHeader = Markdown.link(puzzle.getDisplayName(), link) + " (" + puzzle.getAchievement() + ")";
-                addPuzzleLines(it, puzzle, achievCategories, recordMap, puzzleHeader);
-                it.add("|");
-
-                if (recordMap.containsKey(achievCategories[0][0])) {
-                    totalCycles += recordMap.get(achievCategories[0][0]).getScore().getCycles();
-                    totalNodes += recordMap.get(achievCategories[1][0]).getScore().getNodes();
-                    totalInstructions += recordMap.get(achievCategories[2][0]).getScore().getInstructions();
-                }
-            }
-            it.add(String.format("| **Totals** | **%d** | **%d** | **%d**", totalCycles, totalNodes, totalInstructions));
-            it.add("");
-        }
-
-        {
-            int totalCycles = 0;
-            int totalNodes = 0;
-            int totalInstructions = 0;
-            addPuzzleTableHeader.accept("Cheating Solutions");
-            TISCategory[][] cheatCategories = {{hCN, hCI, hCX, cCN, cCI, cCX},
-                                               {hNC, hNI, hNX, cNC, cNI, cNX},
-                                               {hIC, hIN, hIX, cIC, cIN, cIX}};
-            for (TISPuzzle puzzle : trackedPuzzles) {
-                // copy to edit
-                Map<TISCategory, TISRecord> recordMap = new EnumMap<>(data.get(puzzle));
-                recordMap.values().removeIf(r -> !r.getScore().isCheating() || r.getScore().isAchievement());
-                if (recordMap.isEmpty())
-                    continue; // there is no cheating solve at all
-
-                String link = puzzle.getLink() + "?visualizerFilterTIS-" + puzzle.getId().replace('.', '-') + ".modifiers.cheating=true";
-                String puzzleHeader = Markdown.link(puzzle.getDisplayName(), link);
-                addPuzzleLines(it, puzzle, cheatCategories, recordMap, puzzleHeader);
-                it.add("|");
-
-                if (recordMap.containsKey(cheatCategories[0][0]))
-                    totalCycles += recordMap.get(cheatCategories[0][0]).getScore().getCycles();
-                if (recordMap.containsKey(cheatCategories[1][0]))
-                    totalNodes += recordMap.get(cheatCategories[1][0]).getScore().getNodes();
-                if (recordMap.containsKey(cheatCategories[2][0]))
-                    totalInstructions += recordMap.get(cheatCategories[2][0]).getScore().getInstructions();
-            }
-            it.add(String.format("| **Totals** | **%d** | **%d** | **%d**", totalCycles, totalNodes, totalInstructions));
-            it.add("");
-        }
-
-        Consumer<String> addLbTableHeader =
-            head -> {
-                it.add(String.format("# %s", head));
-                it.add("");
-                it.add("| Solutions | Name(s)");
-                it.add("| --- | --- ");
-            };
-
-        addLbTableHeader.accept("Most record solutions");
-        metaLeaderboardStream(allSolutions, s -> !s.getCategories().isEmpty()).forEach(it::add);
-        it.add("");
-        addLbTableHeader.accept("Most frontier solutions");
-        metaLeaderboardStream(allSolutions, _ -> true).forEach(it::add);
-
-        return lines;
     }
 
     private static final DecimalFormat format = new DecimalFormat("0.##", new DecimalFormatSymbols(Locale.ENGLISH));

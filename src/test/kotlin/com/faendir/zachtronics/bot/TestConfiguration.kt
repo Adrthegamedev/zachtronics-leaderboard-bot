@@ -20,10 +20,10 @@ import com.faendir.zachtronics.bot.config.GitProperties
 import com.faendir.zachtronics.bot.git.GitRepository
 import com.faendir.zachtronics.bot.mors.GifValidationService
 import com.faendir.zachtronics.bot.mors.MorsService
-import com.faendir.zachtronics.bot.reddit.RedditService
+//import com.faendir.zachtronics.bot.reddit.RedditService
 import com.faendir.zachtronics.bot.testutils.JGitNoExternalConfigReader
 import com.faendir.zachtronics.bot.testutils.TestGitRepository
-import com.faendir.zachtronics.bot.testutils.TestRedditService
+//import com.faendir.zachtronics.bot.testutils.TestRedditService
 import discord4j.core.GatewayDiscordClient
 import discord4j.rest.RestClient
 import io.mockk.every
@@ -88,11 +88,6 @@ class TestConfiguration(private val gitProperties: GitProperties) {
     @Bean("tisRepository")
     fun tisRepository(): GitRepository {
         return createTestGitRepository("repositories/tis-leaderboard")
-    }
-
-    @Bean
-    fun redditService(): RedditService {
-        return TestRedditService(extractResourceDirectory("reddit"))
     }
 
     @Bean

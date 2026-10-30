@@ -21,8 +21,8 @@ import com.faendir.zachtronics.bot.TestConfigurationKt;
 import com.faendir.zachtronics.bot.config.GitProperties;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.CategoryRecord;
 import com.faendir.zachtronics.bot.sz.model.*;
 import com.faendir.zachtronics.bot.utils.UtilsKt;
@@ -51,8 +51,8 @@ public class SzManualTest {
 
     @Autowired
     private SzSolutionRepository repository;
-    @Autowired
-    private RedditService redditService;
+    //@Autowired
+    //private RedditService redditService;
 
     @TestConfiguration
     static class RepositoryConfiguration {
@@ -82,11 +82,11 @@ public class SzManualTest {
 
     @Test
     public void rebuildRedditWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = redditService.getWikiPage(Subreddit.SHENZHEN_IO, "index")
-                                   .replaceAll("file:[^()]+/leaderboard/",
-                                               "https://raw.githubusercontent.com/12345ieee/shenzhenIO-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = redditService.getWikiPage(Subreddit.SHENZHEN_IO, "index")
+        //                           .replaceAll("file:[^()]+/leaderboard/",
+        //                                       "https://raw.githubusercontent.com/12345ieee/shenzhenIO-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

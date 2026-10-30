@@ -85,11 +85,11 @@ class FpManualTest {
 
     @Test
     public void rebuildAllWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
-                                .replaceAll("file:/tmp/fp-leaderboard[0-9]+/",
-                                            "https://raw.githubusercontent.com/lastcallbbs-community-developers/forbidden-path-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
+        //                        .replaceAll("file:/tmp/fp-leaderboard[0-9]+/",
+        //                                    "https://raw.githubusercontent.com/lastcallbbs-community-developers/forbidden-path-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

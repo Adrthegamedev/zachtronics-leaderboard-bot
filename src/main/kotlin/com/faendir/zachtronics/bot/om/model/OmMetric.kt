@@ -132,6 +132,16 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override val description: String = metrics.joinToString("+") { it.description }
     }
 
+    sealed class SumDouble(override val displayName: String, vararg metrics: OmMetric<*>) : Computed<Double?> {
+        override val subMetrics = metrics.asList()
+        override val getValueFrom = l@{ score: OmScore ->
+            subMetrics.sumOf { (it.getValueFrom(score) as? Number)?.toDouble() ?: return@l null }
+        }
+
+        override val description: String = metrics.joinToString("+") { it.description }
+    }
+    
+
     sealed class Product(vararg metrics: OmMetric<*>) : Computed<Double?> {
         override val subMetrics = metrics.asList()
         override val getValueFrom = l@{ score: OmScore ->
@@ -141,6 +151,17 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
             }
         }
         override val displayName = "X"
+        override val description = subMetrics.joinToString("·") { it.description }
+    }
+
+    sealed class ProductNoDisplay(override val displayName: String, vararg metrics: OmMetric<*>) : Computed<Double?> {
+        override val subMetrics = metrics.asList()
+        override val getValueFrom = l@{ score: OmScore ->
+            subMetrics.fold(1.0) { acc, part ->
+                val value = (part.getValueFrom(score) as? Number)?.toDouble() ?: return@l null
+                acc * value
+            }
+        }
         override val description = subMetrics.joinToString("·") { it.description }
     }
 
@@ -199,7 +220,9 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object BOUNDING_HEX : Value<Int?>("B", MeasurePoint.VICTORY, OmScore::boundingHex)
 
     data object RATE : Value<Double?>("R", MeasurePoint.INFINITY, OmScore::rate, alias = "C'")
-    data object AREA_INF : Value<LevelValue?>("A", MeasurePoint.INFINITY, OmScore::areaINF)
+    data object AREA_INF : Value<LevelValue?>("A", MeasurePoint.INFINITY, OmScore::areaINF) {
+        override val collapsible: Boolean = false
+    }
     data object HEIGHT_INF : Value<LevelValue?>("H", MeasurePoint.INFINITY, OmScore::heightINF) {
         override val collapsible: Boolean = false
     }
@@ -251,9 +274,30 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object PRODUCT_CA : Product(CYCLES, AREA)
     data object PRODUCT_CI : Product(CYCLES, INSTRUCTIONS)
 
-    data object PRODUCT_GCA : Product(COST, CYCLES, AREA)
-    data object PRODUCT_GCI : Product(COST, CYCLES, INSTRUCTIONS)
+    data object PRODUCT_GCA : ProductNoDisplay("Product", COST, CYCLES, AREA)
+    data object PRODUCT_GCAI : ProductNoDisplay("Product4", COST, CYCLES, AREA, INSTRUCTIONS)
+    data object PRODUCT_GCI : ProductNoDisplay("Product", COST, CYCLES, INSTRUCTIONS)
     data object PRODUCT_INF : Product(COST, RATE, INSTRUCTIONS)
+
+    data object SUM3H : Sum("SumH", COST, CYCLES, HEIGHT)
+    data object SUM4H : Sum("Sum4H", COST, CYCLES, HEIGHT, INSTRUCTIONS)
+    data object SUM3W : SumDouble("SumW", COST, CYCLES, WIDTH)
+    data object SUM4W : SumDouble("Sum4W", COST, CYCLES, WIDTH, INSTRUCTIONS)
+    data object SUM3B : Sum("SumB", COST, CYCLES, BOUNDING_HEX)
+    data object SUM4B : Sum("Sum4B", COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
+    data object PRODUCT_GH : Product(COST, HEIGHT)
+    data object PRODUCT_GW : Product(COST, WIDTH)
+    data object PRODUCT_GB : Product(COST, BOUNDING_HEX)
+    data object PRODUCT_CH : Product(CYCLES, HEIGHT)
+    data object PRODUCT_CW : Product(CYCLES, WIDTH)
+    data object PRODUCT_CB : Product(CYCLES, BOUNDING_HEX)
+
+    data object PRODUCT_GCH : ProductNoDisplay("ProductH", COST, CYCLES, HEIGHT)
+    data object PRODUCT_GCW : ProductNoDisplay("ProductW", COST, CYCLES, WIDTH)
+    data object PRODUCT_GCB : ProductNoDisplay("ProductB", COST, CYCLES, BOUNDING_HEX)
+    data object PRODUCT_GCHI : ProductNoDisplay("Product4H", COST, CYCLES, HEIGHT, INSTRUCTIONS)
+    data object PRODUCT_GCWI : ProductNoDisplay("Product4W", COST, CYCLES, WIDTH, INSTRUCTIONS)
+    data object PRODUCT_GCBI : ProductNoDisplay("Product4B", COST, CYCLES, BOUNDING_HEX, INSTRUCTIONS)
 }
 
 /**
@@ -329,8 +373,21 @@ object OmMetrics {
     private fun computed(type: OmType? = null) = when (type) {
         OmType.NORMAL, OmType.POLYMER_HEIGHT, OmType.POLYMER_WIDTH, OmType.POLYMER_SKEW -> listOf(
             OmMetric.SUM3A,
+            OmMetric.SUM3H,
+            OmMetric.SUM3W,
+            OmMetric.SUM3B,
             OmMetric.SUM4,
+            OmMetric.SUM4H,
+            OmMetric.SUM4W,
+            OmMetric.SUM4B,
             OmMetric.PRODUCT_GCA,
+            OmMetric.PRODUCT_GCAI,
+            OmMetric.PRODUCT_GCH,
+            OmMetric.PRODUCT_GCHI,
+            OmMetric.PRODUCT_GCW,
+            OmMetric.PRODUCT_GCWI,
+            OmMetric.PRODUCT_GCB,
+            OmMetric.PRODUCT_GCBI,
             OmMetric.PRODUCT_INF,
         )
         OmType.PRODUCTION -> listOf(
@@ -341,9 +398,19 @@ object OmMetrics {
         )
         null -> listOf(
             OmMetric.SUM3A,
+            OmMetric.SUM3H,
+            OmMetric.SUM3W,
+            OmMetric.SUM3B,
             OmMetric.SUM3I,
             OmMetric.SUM4,
             OmMetric.PRODUCT_GCA,
+            OmMetric.PRODUCT_GCAI,
+            OmMetric.PRODUCT_GCH,
+            OmMetric.PRODUCT_GCHI,
+            OmMetric.PRODUCT_GCW,
+            OmMetric.PRODUCT_GCWI,
+            OmMetric.PRODUCT_GCB,
+            OmMetric.PRODUCT_GCBI,
             OmMetric.PRODUCT_GCI,
             OmMetric.PRODUCT_INF,
         )
