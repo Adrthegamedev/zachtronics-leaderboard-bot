@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,12 @@ import { Box } from "@mui/material"
 import { useParams } from "react-router-dom"
 import { Visualizer } from "../../components/visualizer/Visualizer"
 import { VisualizerColor } from "../../utils/VisualizerColor"
-import Puzzle from "../../model/Puzzle"
 import KzScore from "../../model/kz/KzScore"
-import fetchFromApi from "../../utils/fetchFromApi"
-import { useState } from "react"
-import RecordDTO from "../../model/RecordDTO"
-import { RecordModal } from "../../components/RecordModal"
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 export default function FcPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
-    fetchFromApi<Puzzle>(`/kz/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - Kaizen Leaderboard`))
-    const [activeRecords, setActiveRecords] = useState<RecordDTO<KzScore>[] | undefined>(undefined)
+    const puzzleId = useParams().puzzleId!
+    useDocumentTitle("Kaizen Leaderboard", `/kz/puzzle/${puzzleId}`)
 
     return (
         <Box
@@ -57,9 +52,7 @@ export default function FcPuzzleVisualizerView() {
                 }}
                 modifiers={{}}
                 defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} />
         </Box>
     )
 }

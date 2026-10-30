@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,14 @@
  */
 
 import Box from "@mui/material/Box"
-import { Button, Tab, Tabs } from "@mui/material"
+import { Button, Link as ExternalLink, Tab, Tabs } from "@mui/material"
 import { Link, Navigate, Outlet, useMatch } from "react-router-dom"
 import { usePersistedState } from "../../../utils/usePersistedState"
 import { lazy, ReactElement, useEffect } from "react"
-import fetchFromApi from "../../../utils/fetchFromApi"
-import Puzzle from "../../../model/Puzzle"
 import LoadingIndicator from "../../../components/LoadingIndicator"
 import { Static, Type } from "@sinclair/typebox"
 import { castOrDefault } from "../../../utils/castOrDefault"
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 
 const PuzzleRecordsView = lazy(() => import("./records/PuzzleRecordsView"))
 const PuzzleFrontierView = lazy(() => import("./frontier/PuzzleFrontierView"))
@@ -64,10 +63,7 @@ export default function PuzzleView() {
         lastSegment && setActiveTab(lastSegment)
     }, [setActiveTab, lastSegment])
     const puzzleId = match?.params?.puzzleId
-
-    useEffect(() => {
-        puzzleId && fetchFromApi<Puzzle>(`/om/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - Opus Magnum Leaderboards`))
-    }, [puzzleId])
+    useDocumentTitle("Opus Magnum Leaderboards", puzzleId ? `/om/puzzle/${puzzleId}` : undefined)
 
     if (!lastSegment || !PuzzleRoutes.some((route) => route.pathSegment === lastSegment)) {
         return <Navigate to={lastActiveTab} />
@@ -103,6 +99,10 @@ export default function PuzzleView() {
                 )}
                 {puzzleId?.match(/w[0-9]+/) ? (
                     <Button
+                        component={ExternalLink}
+                        href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${puzzleId.substring(1)}`}
+                        target="_blank"
+                        rel="noreferrer"
                         size="small"
                         variant="outlined"
                         color="primary"
@@ -111,17 +111,7 @@ export default function PuzzleView() {
                             marginBottom: "auto",
                         }}
                     >
-                        <a
-                            href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${puzzleId.substring(1)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                                color: "inherit",
-                                textDecoration: "none",
-                            }}
-                        >
-                            Get on Steam
-                        </a>
+                        Get on Steam
                     </Button>
                 ) : (
                     <Button

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,12 @@ import { Box } from "@mui/material"
 import { useParams } from "react-router-dom"
 import { Visualizer } from "../../components/visualizer/Visualizer"
 import { VisualizerColor } from "../../utils/VisualizerColor"
-import Puzzle from "../../model/Puzzle"
 import FpScore from "../../model/fp/FpScore"
-import fetchFromApi from "../../utils/fetchFromApi"
-import { useState } from "react"
-import RecordDTO from "../../model/RecordDTO"
-import { RecordModal } from "../../components/RecordModal"
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 export default function FpPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
-    fetchFromApi<Puzzle>(`/fp/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - X'BPGH: The Forbidden Path Leaderboard`))
-    const [activeRecords, setActiveRecords] = useState<RecordDTO<FpScore>[] | undefined>(undefined)
+    const puzzleId = useParams().puzzleId!
+    useDocumentTitle("X'BPGH: The Forbidden Path Leaderboard", `/fp/puzzle/${puzzleId}`)
 
     return (
         <Box
@@ -58,9 +53,7 @@ export default function FpPuzzleVisualizerView() {
                 }}
                 modifiers={{}}
                 defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} />
         </Box>
     )
 }

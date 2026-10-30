@@ -111,14 +111,14 @@ class OmDailyPareto(
             for (element in frontier) {
                 when (element) {
                     is QueryElement.Constraint -> {
-                        for (modifier in listOf(OVERLAP, TRACKLESS) intersect element.metric.scoreParts) {
-                            val name = this::class.simpleName!!.lowercase()
+                        for (modifier in element.metric.scoreParts.filterIsInstance<Modifier>()) {
+                            val name = modifier.internalName.lowercase()
                             val value = records.first().record.score[modifier]
                             append("visualizerFilter-${puzzle.id}.modifiers.${name}=${value}&")
                         }
                     }
                     is QueryElement.Min -> {
-                        if (element.metric is ScorePart<*>) {
+                        if (element.metric is Value<*>) {
                             val min = records.first().record.score[element.metric]
                             append("visualizerFilter-${puzzle.id}.range.${element.metric.description}.min=${min}&")
                             append("visualizerFilter-${puzzle.id}.range.${element.metric.description}.max=${min}&")
@@ -164,8 +164,14 @@ class OmDailyPareto(
                 0 -> OmMetric.Constant("O||!O", true)
                 in 1..2 -> NOVERLAP_TRACKLESS
                 in 3..4 if (measurePoint == MeasurePoint.VICTORY) -> NOVERLAP_LOOPING
-                3 if (puzzle.type != OmType.PRODUCTION) -> Custom(listOf(A2_INF), "A''==0") { it[A2_INF] == 0.0 }
-                4 if (puzzle.type == OmType.NORMAL) -> Custom(listOf(A1_INF), "A'==0") { it[A1_INF] == 0.0 }
+                3 if (puzzle.type != OmType.PRODUCTION) -> {
+                    frontierMetrics.remove(AREA_INF)
+                    Custom("A''==0", listOf(AREA_INF), { !it.overlap && it[A2_INF] == 0.0 })
+                }
+                4 if (puzzle.type == OmType.NORMAL) -> {
+                    frontierMetrics.remove(AREA_INF)
+                    NOVERLAP_FINITE_AREA
+                }
                 else -> NOVERLAP
             })
         // minimized, or nearly so

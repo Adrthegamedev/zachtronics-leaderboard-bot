@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,12 @@ import { Box } from "@mui/material"
 import { useParams } from "react-router-dom"
 import { Visualizer } from "../../components/visualizer/Visualizer"
 import { VisualizerColor } from "../../utils/VisualizerColor"
-import Puzzle from "../../model/Puzzle"
 import IfScore from "../../model/if/IfScore"
-import fetchFromApi from "../../utils/fetchFromApi"
-import { RecordModal } from "../../components/RecordModal"
-import { useState } from "react"
-import RecordDTO from "../../model/RecordDTO"
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 export default function IfPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
-    fetchFromApi<Puzzle>(`/if/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - Infinifactory Leaderboard`))
-    const [activeRecords, setActiveRecords] = useState<RecordDTO<IfScore>[] | undefined>(undefined)
+    const puzzleId = useParams().puzzleId!
+    useDocumentTitle("Infinifactory Leaderboard", `/if/puzzle/${puzzleId}`)
 
     return (
         <Box
@@ -82,9 +77,7 @@ export default function IfPuzzleVisualizerView() {
                     },
                 }}
                 defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} />
         </Box>
     )
 }

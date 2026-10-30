@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@ import { IconButton } from "@mui/material"
 import Brightness7Icon from "@mui/icons-material/Brightness7"
 import Brightness4Icon from "@mui/icons-material/Brightness4"
 import { PlayArrow, PlayDisabled, Visibility, VisibilityOff } from "@mui/icons-material"
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 
 export default function SettingsView() {
+    useDocumentTitle("Settings - Opus Magnum Leaderboards")
     const appSettings = useAppSettings()
 
     return (
@@ -37,6 +39,12 @@ export default function SettingsView() {
                         {appSettings.autoPlay ? <PlayArrow /> : <PlayDisabled />}
                     </IconButton>{" "}
                     Autoplay
+                </div>
+                <div>
+                    <IconButton sx={{ ml: 1 }} onClick={() => appSettings.setShowMedia(!appSettings.showMedia)} color="inherit">
+                        {appSettings.showMedia ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>{" "}
+                    Show solution media
                 </div>
                 <div>
                     <IconButton sx={{ ml: 1 }} onClick={() => appSettings.setShowControls(!appSettings.showControls)} color="inherit">

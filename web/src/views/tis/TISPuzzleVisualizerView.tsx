@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024
+ * Copyright (c) 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,12 @@ import { Box } from "@mui/material"
 import { useParams } from "react-router-dom"
 import { Visualizer } from "../../components/visualizer/Visualizer"
 import { VisualizerColor } from "../../utils/VisualizerColor"
-import Puzzle from "../../model/Puzzle"
 import TISScore from "../../model/tis/TISScore"
-import fetchFromApi from "../../utils/fetchFromApi"
-import { RecordModal } from "../../components/RecordModal"
-import { useState } from "react"
-import RecordDTO from "../../model/RecordDTO"
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 export default function TISPuzzleVisualizerView() {
-    const puzzleId = useParams().puzzleId
-    fetchFromApi<Puzzle>(`/tis/puzzle/${puzzleId}`).then((puzzle) => (document.title = `${puzzle.displayName} - TIS-100 Leaderboard`))
-    const [activeRecords, setActiveRecords] = useState<RecordDTO<TISScore>[] | undefined>(undefined)
+    const puzzleId = useParams().puzzleId!
+    useDocumentTitle("TIS-100 Leaderboard", `/tis/puzzle/${puzzleId}`)
 
     return (
         <Box
@@ -82,9 +77,7 @@ export default function TISPuzzleVisualizerView() {
                     },
                 }}
                 defaultColor={VisualizerColor.DEFAULT}
-                onClick={setActiveRecords}
             />
-            <RecordModal records={activeRecords} setRecords={setActiveRecords} />
         </Box>
     )
 }
