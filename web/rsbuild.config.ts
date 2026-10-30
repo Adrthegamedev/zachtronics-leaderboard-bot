@@ -24,8 +24,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/': 'https://novae.observer',
-      // '/': 'http://novae.observer',
+      '/': {
+        target: 'https://novae.observer',
+        bypass(request) {
+          return request.headers['x-zlbb-api'] === 'true' ? undefined : true;
+        },
+      },
     },
   },
 });

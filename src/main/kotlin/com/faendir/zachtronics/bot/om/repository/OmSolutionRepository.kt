@@ -57,7 +57,7 @@ import kotlin.io.path.readBytes
 @OptIn(ExperimentalSerializationApi::class)
 @Component
 class OmSolutionRepository(
-    @Qualifier("omLeaderboardRepository") private val leaderboard: GitRepository,
+    @Qualifier("omRepository") private val leaderboard: GitRepository,
     private val omUrlMapper: OmUrlMapper,
     private val morsService: MorsService,
     private val gifValidationService: GifValidationService,
@@ -234,7 +234,7 @@ class OmSolutionRepository(
             val fullCompRes = OmMetrics.FULL_SCORE.partialCompare(submission.score, record.score)
 
             if (fullCompRes == EQUAL) { // candidate is identical to record
-                if (submission.allowGifUpdate && (submission.displayLink != record.displayLink || submission.gifData != null)) {
+                if (submission.allowGifOverwrite && (submission.displayLink != record.displayLink || submission.gifData != null)) {
                     handleBeatenRecord(mRecord, mRecord.categories, mRecord.frontierManifolds)
                     return SubmitResult.Updated(null, null, mRecord.toCategoryRecord())
                 } else {
@@ -414,7 +414,7 @@ class OmSolutionRepository(
 
     private fun GitRepository.ReadAccess.getPuzzleDir(puzzle: OmPuzzle): File = File(repo, "${puzzle.group.name}/${puzzle.name}")
 
-    private fun fileStemOf(puzzle: OmPuzzle, score: OmScore) = "${score.toDisplayString(DisplayContext.fileName())}_${puzzle.name}"
+    private fun fileStemOf(puzzle: OmPuzzle, score: OmScore) = "${puzzle.name}_${score.toDisplayString(DisplayContext.fileName())}"
     private fun OmRecord.fileStem() = fileStemOf(puzzle, score)
 
     override fun find(puzzle: OmPuzzle, category: OmCategory): OmRecord? {

@@ -40,8 +40,6 @@ Add the push webhook:
 * Content type: `application/json`
 * Secret: GPG-encoded file at https://discord.com/channels/747474678498721994/747474678498721997/885673075255943198
 
-Give `F43nd1r` Write permissions if he's not an admin of the particular org.
-
 #### Project
 
 * Add to the `GitConfiguration` class.

@@ -63,6 +63,7 @@ enum class OmGroup(val collection: OmCollection, override val displayName: Strin
     TOURNAMENT_2025(COMMUNITY, "Tournament 2025"),
     TOURNAMENT_2026(COMMUNITY, "Tournament 2026"),
     WEEKLIES_1(COMMUNITY, "Best Of Weeklies 1"),
+    WEEKLIES_2(COMMUNITY, "Best Of Weeklies 2"),
 
     WEEKLIES_2021(CUSTOM, "Weeklies 2021"),
     WEEKLIES_2022(CUSTOM, "Weeklies 2022"),

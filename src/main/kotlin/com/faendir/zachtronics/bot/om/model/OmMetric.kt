@@ -18,8 +18,6 @@ package com.faendir.zachtronics.bot.om.model
 
 import com.faendir.zachtronics.bot.model.Metric
 import com.faendir.zachtronics.bot.model.StringFormat
-import com.faendir.zachtronics.bot.utils.InfinInt
-import com.faendir.zachtronics.bot.utils.InfinInt.Companion.toInfinInt
 import com.faendir.zachtronics.bot.utils.LevelValue
 import com.faendir.zachtronics.bot.utils.newEnumSet
 import com.faendir.zachtronics.bot.utils.runIf
@@ -30,19 +28,18 @@ import java.util.*
 /**
  * @property displayName `C` or `T` or `Sum`
  * @property description `c` or `T` or `g+c+a`
+ * @property internalName `CYCLES` or `TRACKLESS` or `SUM3A`
  */
 @Suppress("ClassName")
 sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Comparable<T & Any>? {
     val description: String
+    val internalName get() = this::class.simpleName!!
     val scoreParts: Set<ScorePart<*>>
     val measurePoint: MeasurePoint
     val getValueFrom: (OmScore) -> T
 
     override fun compare(o1: OmScore, o2: OmScore) =
         compareValuesBy(o1, o2, nullsLast(), getValueFrom)
-
-    /** `34c` or `O` or `g+c+a=215`, no spaces/separators */
-    fun describe(score: OmScore, format: StringFormat): String?
 
     companion object {
         private val numberFormat = DecimalFormat("0.###", DecimalFormatSymbols(Locale.ENGLISH))
@@ -62,19 +59,15 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     ) : ScorePart<T> where T : Comparable<T & Any>? {
         override val description: String = displayName.lowercase()
 
-        override fun describe(score: OmScore, format: StringFormat): String? =
+        fun describe(score: OmScore, format: StringFormat): String? =
             when (val v = getValueFrom(score)) {
                 null -> null
                 is Int -> "$v$description"
                 is Double -> {
                     numberFormat.format(v).runIf(format == StringFormat.FILE_NAME) { replace("∞", "INF") } + description
                 }
-                is InfinInt -> when (format) {
-                    StringFormat.FILE_NAME -> "${v.toLatinString()}$description"
-                    else -> "$v$description"
-                }
                 is LevelValue -> when (format) { // `1.23a1` and `1.23a'`
-                    StringFormat.FILE_NAME -> "${numberFormat.format(v.value)}$description${v.level}"
+                    StringFormat.FILE_NAME -> "${numberFormat.format(v.value)}$description${if (v.level == 0) "" else v.level}"
                     else -> "${numberFormat.format(v.value)}$description" + "'".repeat(v.level)
                 }
                 else -> throw IllegalArgumentException("Invalid type: ${v::class.simpleName}")
@@ -93,7 +86,7 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override fun compare(o1: OmScore, o2: OmScore) =
             compareValuesBy(o1, o2, if (reverseOrder) reverseOrder() else naturalOrder(), getValueFrom)
 
-        override fun describe(score: OmScore, format: StringFormat): String? =
+        fun describe(score: OmScore): String? =
             if (getValueFrom(score)) displayName else null
     }
 
@@ -113,9 +106,6 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
                 else -> v
             }
         }
-
-        override fun describe(score: OmScore, format: StringFormat) =
-            getValueFrom(score)?.let { "$description=${numberFormat.format(it)}" }
     }
 
     /** functions of other [OmMetric]s */
@@ -128,7 +118,7 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override val scoreParts: Set<ScorePart<*>>
             get() = subMetrics.flatMapTo(HashSet()) { it.scoreParts }
 
-        override fun describe(score: OmScore, format: StringFormat): String? =
+        fun describe(score: OmScore, format: StringFormat): String? =
             getValueFrom(score)?.let { "$description=${numberFormat.format(it)}" }
     }
 
@@ -216,7 +206,6 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
         override val getValueFrom: (OmScore) -> T = { value }
         override val scoreParts = emptySet<ScorePart<*>>()
         override val description = displayName
-        override fun describe(score: OmScore, format: StringFormat): String? = value.toString()
     }
 
     data object COST : Value<Int>("G", MeasurePoint.START, OmScore::cost)
@@ -232,24 +221,33 @@ sealed interface OmMetric<out T> : Metric, Comparator<OmScore> where T : Compara
     data object AREA_INF : Value<LevelValue?>("A", MeasurePoint.INFINITY, OmScore::areaINF) {
         override val collapsible: Boolean = false
     }
-    data object HEIGHT_INF : Value<InfinInt?>("H", MeasurePoint.INFINITY, OmScore::heightINF) {
+    data object HEIGHT_INF : Value<LevelValue?>("H", MeasurePoint.INFINITY, OmScore::heightINF) {
         override val collapsible: Boolean = false
     }
-    data object WIDTH_INF : Value<Double?>("W", MeasurePoint.INFINITY, OmScore::widthINF) {
+    data object WIDTH_INF : Value<LevelValue?>("W", MeasurePoint.INFINITY, OmScore::widthINF) {
         override val collapsible: Boolean = false
     }
-    data object BOUNDING_HEX_INF : Value<InfinInt?>("B", MeasurePoint.INFINITY, OmScore::boundingHexINF) {
+    data object BOUNDING_HEX_INF : Value<LevelValue?>("B", MeasurePoint.INFINITY, OmScore::boundingHexINF) {
         override val collapsible: Boolean = false
     }
 
     // convenience
-    data object A0_INF : Value<InfinInt?>("A°", MeasurePoint.INFINITY, { it.areaINF?.get(0)?.toInfinInt() }, alias = "A0")
+    data object A0_INF : Value<Double?>("A°", MeasurePoint.INFINITY, { it.areaINF?.get(0) }, alias = "A0")
     data object A1_INF : Value<Double?>("A'", MeasurePoint.INFINITY, { it.areaINF?.get(1) }, alias = "A1")
     data object A2_INF : Value<Double?>("A''", MeasurePoint.INFINITY, { it.areaINF?.get(2) }, alias = "A2")
+    
+    data object H0_INF : Value<Double?>("H°", MeasurePoint.INFINITY, { it.heightINF?.get(0) }, alias = "H0")
+    data object H1_INF : Value<Double?>("H'", MeasurePoint.INFINITY, { it.heightINF?.get(1) }, alias = "H1")
+    
+    data object W0_INF : Value<Double?>("W°", MeasurePoint.INFINITY, { it.widthINF?.get(0) }, alias = "W0")
+    data object W1_INF : Value<Double?>("W'", MeasurePoint.INFINITY, { it.widthINF?.get(1) }, alias = "W1")
+    
+    data object B0_INF : Value<Double?>("B°", MeasurePoint.INFINITY, { it.boundingHexINF?.get(0) }, alias = "B0")
+    data object B1_INF : Value<Double?>("B'", MeasurePoint.INFINITY, { it.boundingHexINF?.get(1) }, alias = "B1")
 
     data object OVERLAP : Modifier("O", MeasurePoint.START, OmScore::overlap)
     data object TRACKLESS : Modifier("T", MeasurePoint.START, OmScore::trackless, reverseOrder = true)
-    /** we're massively cheating by making it a first class [Modifier]@V instead of a [Computed]@INF, what do I not do for pretty gifs */
+    /** it's not properly a @V quantity, but in 99% of the solves it is determined before 6 outputs */
     data object LOOPING : Modifier("L", MeasurePoint.VICTORY, OmScore::looping, reverseOrder = true)
 
     data object ANYTHING_GOES : Constant<Boolean>("O", true)
@@ -348,13 +346,17 @@ object OmMetrics {
     fun areaLikes(type: OmType? = null) = when (type) {
         null, OmType.NORMAL -> listOf(
             OmMetric.HEIGHT, OmMetric.WIDTH, OmMetric.BOUNDING_HEX,
-            OmMetric.HEIGHT_INF, OmMetric.WIDTH_INF, OmMetric.BOUNDING_HEX_INF,
+            OmMetric.HEIGHT_INF, OmMetric.H0_INF, OmMetric.H1_INF,
+            OmMetric.WIDTH_INF, OmMetric.W0_INF, OmMetric.W1_INF,
+            OmMetric.BOUNDING_HEX_INF, OmMetric.B0_INF, OmMetric.B1_INF,
         )
         OmType.POLYMER_HEIGHT -> listOf(
-            OmMetric.HEIGHT, OmMetric.HEIGHT_INF,
+            OmMetric.HEIGHT,
+            OmMetric.HEIGHT_INF, OmMetric.H0_INF, OmMetric.H1_INF,
         )
         OmType.POLYMER_WIDTH -> listOf(
-            OmMetric.WIDTH, OmMetric.WIDTH_INF,
+            OmMetric.WIDTH,
+            OmMetric.WIDTH_INF, OmMetric.W0_INF, OmMetric.W1_INF,
         )
         OmType.POLYMER_SKEW, OmType.PRODUCTION -> emptyList()
     }
