@@ -33,10 +33,10 @@ Add `lombok.copyableannotations += com.faendir.zachtronics.bot.cw.CwQualifier` t
 
 #### GitHub
 
-Create git repo in https://github.com/zachtronics-leaderboards.
+Create git repo in game org.
 
 Add the push webhook:
-* Payload URL: https://zlbb.faendir.com/push
+* Payload URL: https://novae.observer/push
 * Content type: `application/json`
 * Secret: GPG-encoded file at https://discord.com/channels/747474678498721994/747474678498721997/885673075255943198
 

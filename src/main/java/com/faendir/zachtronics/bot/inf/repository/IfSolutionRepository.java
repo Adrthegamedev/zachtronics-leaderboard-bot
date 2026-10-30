@@ -19,8 +19,8 @@ package com.faendir.zachtronics.bot.inf.repository;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.inf.model.*;
 import com.faendir.zachtronics.bot.model.DisplayContext;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.AbstractSolutionRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -45,8 +45,8 @@ public class IfSolutionRepository extends AbstractSolutionRepository<IfCategory,
     private final IfCategory[][] wikiCategories = {{CF, CB}, {CFNG, CBNG},
                                                    {FC, FB, FIC, FIB},
                                                    {BC, BF, BNC, BNF}};
-    private final RedditService redditService;
-    private final Subreddit subreddit = Subreddit.INFINIFACTORY;
+    //private final RedditService redditService;
+    //private final Subreddit subreddit = Subreddit.INFINIFACTORY;
 
     @Qualifier("ifRepository")
     private final GitRepository gitRepo;

@@ -30,14 +30,14 @@ internal class OmUrlMapperTest {
     @Test
     fun `should map old short to long url correctly`() {
         expectThat(urlMapper.map("d5524ee3/P103/ELECTRUM_SEPARATION_2265g-47c-1694a-516i-59h-34.5w-1r"))
-            .isEqualTo("https://raw.githubusercontent.com/zachtronics-leaderboards/om-leaderboard/d5524ee3/" +
+            .isEqualTo("https://raw.githubusercontent.com/Adrthegamedev/om-leaderboard/d5524ee3/" +
                        "JOURNAL_VIII/ELECTRUM_SEPARATION/ELECTRUM_SEPARATION_2265g-47c-1694a-516i-59h-34.5w-1r.solution")
     }
 
     @Test
     fun `should map new short to long url correctly`() {
         expectThat(urlMapper.map("d5524ee3/P103/2265g-47c-1694a-516i-59h-34.5w-1r"))
-            .isEqualTo("https://raw.githubusercontent.com/zachtronics-leaderboards/om-leaderboard/d5524ee3/" +
+            .isEqualTo("https://raw.githubusercontent.com/Adrthegamedev/om-leaderboard/d5524ee3/" +
                        "JOURNAL_VIII/ELECTRUM_SEPARATION/ELECTRUM_SEPARATION_2265g-47c-1694a-516i-59h-34.5w-1r.solution")
     }
 
@@ -48,6 +48,6 @@ internal class OmUrlMapperTest {
                 2265, 516, overlap = false, trackless = false,
                 47, 1694, 59, 34.5, 12, looping = true,
                 1.0, LevelValue(0, 1800.0), 60.toLevelValue(), 35.toLevelValue(), 12.toLevelValue())
-        )).isEqualTo("https://zlbb.faendir.com/l/om/d5524ee3/P103/2265g-516i-47c-1694a-59h-34.5w-12b-1r-1800a-60h-35w-12b-L")
+        )).isEqualTo("https://novae.observer/l/om/d5524ee3/P103/2265g-516i-47c-1694a-59h-34.5w-12b-1r-1800a-60h-35w-12b-L")
     }
 }

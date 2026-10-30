@@ -25,7 +25,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/': {
-        target: 'https://zlbb.faendir.com',
+        target: 'https://novae.observer',
         bypass(request) {
           return request.headers['x-zlbb-api'] === 'true' ? undefined : true;
         },

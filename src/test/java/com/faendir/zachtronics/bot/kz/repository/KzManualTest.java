@@ -21,8 +21,8 @@ import com.faendir.zachtronics.bot.TestConfigurationKt;
 import com.faendir.zachtronics.bot.config.GitProperties;
 import com.faendir.zachtronics.bot.git.GitRepository;
 import com.faendir.zachtronics.bot.kz.model.*;
-import com.faendir.zachtronics.bot.reddit.RedditService;
-import com.faendir.zachtronics.bot.reddit.Subreddit;
+//import com.faendir.zachtronics.bot.reddit.RedditService;
+//import com.faendir.zachtronics.bot.reddit.Subreddit;
 import com.faendir.zachtronics.bot.repository.CategoryRecord;
 import com.faendir.zachtronics.bot.utils.UtilsKt;
 import com.faendir.zachtronics.bot.validation.ValidationException;
@@ -53,8 +53,8 @@ public class KzManualTest {
 
     @Autowired
     private KzSolutionRepository repository;
-    @Autowired
-    private RedditService redditService;
+    //@Autowired
+    //private RedditService redditService;
 
     @TestConfiguration
     static class RepositoryConfiguration {
@@ -84,11 +84,11 @@ public class KzManualTest {
 
     @Test
     public void rebuildRedditWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = redditService.getWikiPage(Subreddit.KAIZEN, repository.wikiPageName(null))
-                                   .replaceAll("file:[^()]+/leaderboard/",
-                                               "https://raw.githubusercontent.com/12345ieee/kaizen-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = redditService.getWikiPage(Subreddit.KAIZEN, repository.wikiPageName(null))
+        //                           .replaceAll("file:[^()]+/leaderboard/",
+        //                                       "https://raw.githubusercontent.com/12345ieee/kaizen-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

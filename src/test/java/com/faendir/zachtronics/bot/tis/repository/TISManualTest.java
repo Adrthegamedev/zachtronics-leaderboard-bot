@@ -82,11 +82,11 @@ class TISManualTest {
 
     @Test
     public void rebuildAllWiki() {
-        repository.rebuildRedditLeaderboard(null);
-        String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
-                                .replaceAll("file:[^()]+/leaderboard/",
-                                            "https://raw.githubusercontent.com/12345ieee/tis100-leaderboard/master");
-        System.out.println(page);
+        //repository.rebuildRedditLeaderboard(null);
+        //String page = repository.getRedditService().getWikiPage(repository.getSubreddit(), repository.wikiPageName(null))
+        //                        .replaceAll("file:[^()]+/leaderboard/",
+        //                                    "https://raw.githubusercontent.com/12345ieee/tis100-leaderboard/master");
+        //System.out.println(page);
     }
 
     @Test

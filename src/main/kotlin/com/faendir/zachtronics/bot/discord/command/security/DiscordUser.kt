@@ -42,12 +42,13 @@ enum class DiscordUser(val id: Long, val getSpecialEmoji: (Guild?) -> Emoji? = {
     A_SNOWBALL(136186716334587904),
     ROLAMNI(177824842370777088),
     HUETOBI(229031957445476352),
-    CRAZYBOT27(591393700131635210)
+    CRAZYBOT27(591393700131635210),
+    NOVAESYS(474424490382589952)
     ;
 
     companion object {
         @JvmField
-        val BOT_OWNERS = setOf(F43ND1R, IEEE12345)
+        val BOT_OWNERS = setOf(F43ND1R, IEEE12345, NOVAESYS)
         val OM_LB_ADMINS = BOT_OWNERS + setOf(BIGGIE, GRIMMY, RP0, PANIC, SYX, CRAZYBOT27)
     }
 }

@@ -26,32 +26,32 @@ import org.springframework.context.annotation.Profile
 class GitConfiguration(private val gitProperties: GitProperties) {
 
     @Bean("cwRepository")
-    fun cwRepository() = GitRepository(gitProperties, "chipwizard-leaderboard", "https://github.com/zachtronics-leaderboards/chipwizard-leaderboard.git")
+    fun cwRepository() = GitRepository(gitProperties, "chipwizard-leaderboard", "https://github.com/Adrthegamedev/chipwizard-leaderboard.git")
 
     @Bean("exaRepository")
-    fun exaRepository() = GitRepository(gitProperties, "exapunks-leaderboard", "https://github.com/zachtronics-leaderboards/exapunks-leaderboard.git")
+    fun exaRepository() = GitRepository(gitProperties, "exapunks-leaderboard", "https://github.com/Adrthegamedev/exapunks-leaderboard.git")
 
     @Bean("fcRepository")
-    fun fcRepository() = GitRepository(gitProperties, "foodcourt-leaderboard", "https://github.com/zachtronics-leaderboards/foodcourt-leaderboard.git")
+    fun fcRepository() = GitRepository(gitProperties, "foodcourt-leaderboard", "https://github.com/Adrthegamedev/foodcourt-leaderboard.git")
 
     @Bean("fpRepository")
-    fun fpRepository() = GitRepository(gitProperties, "forbidden-path-leaderboard", "https://github.com/zachtronics-leaderboards/forbidden-path-leaderboard.git")
+    fun fpRepository() = GitRepository(gitProperties, "forbidden-path-leaderboard", "https://github.com/Adrthegamedev/forbidden-path-leaderboard.git")
 
     @Bean("ifRepository")
-    fun ifRepository() = GitRepository(gitProperties, "infinifactory-leaderboard", "https://github.com/zachtronics-leaderboards/infinifactory-leaderboard.git")
+    fun ifRepository() = GitRepository(gitProperties, "infinifactory-leaderboard", "https://github.com/Adrthegamedev/infinifactory-leaderboard.git")
 
     @Bean("kzRepository")
-    fun kzRepository() = GitRepository(gitProperties, "kaizen-leaderboard", "https://github.com/zachtronics-leaderboards/kaizen-leaderboard.git")
+    fun kzRepository() = GitRepository(gitProperties, "kaizen-leaderboard", "https://github.com/Adrthegamedev/kaizen-leaderboard.git")
 
     @Bean("omRepository")
-    fun omRepository() = GitRepository(gitProperties, "om-leaderboard", "https://github.com/zachtronics-leaderboards/om-leaderboard.git")
+    fun omRepository() = GitRepository(gitProperties, "om-leaderboard", "https://github.com/Adrthegamedev/om-leaderboard.git")
 
-    @Bean("scRepository")
-    fun scRepository() = GitRepository(gitProperties, "sc-leaderboard", "https://github.com/zachtronics-leaderboards/spacechem-leaderboard.git")
+    @Bean("scArchiveRepository")
+    fun scArchiveRepository() = GitRepository(gitProperties, "sc-archive", "https://github.com/Adrthegamedev/spacechem-archive.git")
 
     @Bean("szRepository")
-    fun szRepository() = GitRepository(gitProperties, "shenzhenIO-leaderboard", "https://github.com/zachtronics-leaderboards/shenzhenIO-leaderboard.git")
+    fun szRepository() = GitRepository(gitProperties, "shenzhenIO-leaderboard", "https://github.com/Adrthegamedev/shenzhenIO-leaderboard.git")
 
     @Bean("tisRepository")
-    fun tisRepository() = GitRepository(gitProperties, "tis-leaderboard", "https://github.com/zachtronics-leaderboards/tis100-leaderboard.git")
+    fun tisRepository() = GitRepository(gitProperties, "tis-leaderboard", "https://github.com/Adrthegamedev/tis100-leaderboard.git")
 }
