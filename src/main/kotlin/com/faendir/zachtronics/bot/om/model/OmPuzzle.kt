@@ -482,7 +482,7 @@ enum class OmPuzzle(
     PROFANED_MOONSHINE(DARK_BRICK, NORMAL, "Profaned Moonshine", "profaned-moonshine"),
     CRITELLIC_SLAG(DARK_BRICK, NORMAL, "Critellic Slag", "critellic-slag"),
 
-    SURRENDIER_FLARE_SALT(FLARE_MODIF, NORMAL, "Surrendier Flare Salt", "c651474216460134"),
+    SURRENDIER_FLARE_SALT(FLARE_MODIF, NORMAL, "Surrendier Flare Salt", "c651474216460134", "c254120257447037"),
 
     GRAPHITE_PRESS(CRUX_RESISTANCE, NORMAL, "Graphite Press", "TIEN-1.0graphite_press"),
     PYROLYTIC_BRIQUETTE(CRUX_RESISTANCE, NORMAL, "Pyrolytic Briquette", "USP-2.1pyrolytic_briquette"),
@@ -494,7 +494,7 @@ enum class OmPuzzle(
     SILK_OF_NEPTUNE(DISJOINT_JOURNAL_I, POLYMER_HEIGHT, "Silk of Neptune", "DisjointJournal_SilkOfNeptune"),
     ASH_OF_VULCAN(DISJOINT_JOURNAL_I, PRODUCTION, "Ash of Vulcan", "DisjointJournal_AshOfVulcan"),
 
-    // ODD_BEVERAGE(ALCHEMIST_FOR_HIRE, NORMAL, "Odd Beverage", "AFH1_OddBeverage"),
+    ODD_BEVERAGE(ALCHEMIST_FOR_HIRE, NORMAL, "Odd Beverage", "AFH1_OddBeverage"),
 
     MY_ARMS_ARE_BOUND(MISC, NORMAL, "My Arms Are Bound", "MyArmsAreBound"),
     COLON_THREE(MISC, NORMAL, ":3", "c558264505561023"),
