@@ -48,6 +48,6 @@ internal class OmUrlMapperTest {
                 2265, 516, overlap = false, trackless = false,
                 47, 1694, 59, 34.5, 12, looping = true,
                 1.0, LevelValue(0, 1800.0), 60.toLevelValue(), 35.toLevelValue(), 12.toLevelValue())
-        )).isEqualTo("https://novae.observer/l/om/d5524ee3/P103/2265g-516i-47c-1694a-59h-34.5w-12b-1r-1800a-60h-35w-12b-L")
+        )).isEqualTo("https://lb.novae.observer/l/om/d5524ee3/P103/2265g-516i-47c-1694a-59h-34.5w-12b-1r-1800a-60h-35w-12b-L")
     }
 }
