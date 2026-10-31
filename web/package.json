@@ -21,7 +21,7 @@
         "react-dropzone": "20.1.4",
         "react-intersection-observer": "11.0.1",
         "react-plotly.js": "4.1.0",
-        "react-router-dom": "7.18.4",
+        "react-router-dom": "7.18.5",
         "typescript": "7.0.2"
     },
     "devDependencies": {
