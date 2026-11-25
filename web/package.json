@@ -4,7 +4,7 @@
     "version": "0.1.0",
     "private": true,
     "type": "module",
-    "packageManager": "yarn@4.18.1",
+    "packageManager": "yarn@4.19.0",
     "dependencies": {
         "@emotion/react": "11.14.0",
         "@emotion/styled": "11.14.1",
@@ -18,14 +18,14 @@
         "react": "19.3.1",
         "react-cool-dimensions": "3.0.1",
         "react-dom": "19.3.1",
-        "react-dropzone": "20.2.0",
+        "react-dropzone": "20.2.1",
         "react-intersection-observer": "11.0.1",
         "react-plotly.js": "4.1.0",
-        "react-router-dom": "7.18.5",
+        "react-router-dom": "7.18.6",
         "typescript": "7.0.2"
     },
     "devDependencies": {
-        "@rsbuild/core": "2.3.2",
+        "@rsbuild/core": "2.3.3",
         "@rsbuild/plugin-react": "2.1.1",
         "@simbathesailor/use-what-changed": "2.0.0",
         "@types/d3-format": "3.0.4",
