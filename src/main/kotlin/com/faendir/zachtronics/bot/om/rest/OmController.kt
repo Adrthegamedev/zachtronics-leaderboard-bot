@@ -150,7 +150,7 @@ class OmController(
         gameUploadScope.launch {
             try {
                 withTimeout(15.minutes) {
-                    val submission = createSubmission(Base64.decode(solution), user, gifData = Base64.decode(gif))
+                    val submission = createSubmission(Base64.decode(solution), user, gif = "https://solution.media.missing")
                     val result = doSubmit(submission)
                     logger.info("Received game api submission for ${submission.puzzle.name} from $user. Result: $result")
                 }
